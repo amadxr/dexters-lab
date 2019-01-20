@@ -23,7 +23,7 @@ class ExperimentResource extends JsonResource
             'results' => $this->results,
             'validated_learning' => $this->validated_learning,
             'next_action' => $this->next_action,
-            'status' => $this->closed ? 'closed' : 'open',
+            'parent_id' => $this->parent_id,
             'created_at' => $this->created_at->format('d M Y'),
             'updated_at' => $this->updated_at->diffForHumans()
         ];
