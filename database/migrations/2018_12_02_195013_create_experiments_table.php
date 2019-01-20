@@ -19,9 +19,9 @@ class CreateExperimentsTable extends Migration
             $table->text('background');
             $table->text('falsifiable_hypothesis');
             $table->text('details');
-            $table->text('results');
-            $table->text('validated_learning');
-            $table->text('next_action');
+            $table->text('results')->nullable();
+            $table->text('validated_learning')->nullable();
+            $table->text('next_action')->nullable();
             $table->timestamps();
         });
     }

@@ -28,9 +28,6 @@ class StoreExperiment extends FormRequest
             'background' => 'required|min:3',
             'falsifiable_hypothesis' => 'required|min:3',
             'details' => 'required|min:3',
-            'results' => 'required|min:3',
-            'validated_learning' => 'required|min:3',
-            'next_action' => 'required',
         ];
     }
 }
