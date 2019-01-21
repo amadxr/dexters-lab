@@ -5,7 +5,7 @@
             <p class="lead">To create your first experiment click the button below.</p>
             <a class="btn btn-primary btn-lg" href="create" role="button">Start experimenting!</a>
         </div>
-        <experiment-component v-for="experiment in experiments" :key="experiment.id"/>
+        <experiment-component v-for="experiment in experiments" :experiment="experiment" :key="experiment.id"/>
     </div>
 </template>
 
@@ -21,7 +21,6 @@
 
         created() {
             this.fetch();
-            console.log(this.experiments);
         },
 
         methods: {

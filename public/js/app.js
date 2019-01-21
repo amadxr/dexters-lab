@@ -48491,7 +48491,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         this.fetch();
-        console.log(this.experiments);
     },
 
 
@@ -48541,7 +48540,10 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.experiments, function(experiment) {
-        return _c("experiment-component", { key: experiment.id })
+        return _c("experiment-component", {
+          key: experiment.id,
+          attrs: { experiment: experiment }
+        })
       })
     ],
     2
