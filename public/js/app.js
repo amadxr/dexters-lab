@@ -47415,6 +47415,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47455,28 +47460,54 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.experiments, function(experiment) {
-      return _c("div", { staticClass: "card mb-3" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("div", { staticClass: "float-left" }, [
-            _c("h5", [_vm._v(_vm._s(experiment.title))])
+    [
+      _vm.experiments.length === 0
+        ? _c("div", { staticClass: "jumbotron" }, [
+            _c("h1", { staticClass: "display-4" }, [
+              _vm._v("There are no experiments yet!")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "lead" }, [
+              _vm._v("To create your first experiment click the button below.")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary btn-lg",
+                attrs: { href: "create", role: "button" }
+              },
+              [_vm._v("Start experimenting!")]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.experiments, function(experiment) {
+        return _c("div", { staticClass: "card mb-3" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("div", { staticClass: "float-left" }, [
+              _c("h5", [_vm._v(_vm._s(experiment.title))])
+            ]),
+            _vm._v(" "),
+            _vm._m(0, true)
           ]),
           _vm._v(" "),
-          _vm._m(0, true)
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("label", { attrs: { id: "started" } }, [_vm._v("Hypothesis: ")]),
-          _vm._v(" " + _vm._s(experiment.falsifiable_hypothesis) + "\n        ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-footer text-muted text-right" }, [
-          _vm._v(
-            "\n            " + _vm._s(experiment.created_at) + "\n        "
-          )
+          _c("div", { staticClass: "card-body" }, [
+            _c("label", { attrs: { id: "started" } }, [_vm._v("Hypothesis: ")]),
+            _vm._v(
+              " " + _vm._s(experiment.falsifiable_hypothesis) + "\n        "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer text-muted text-right" }, [
+            _vm._v(
+              "\n            " + _vm._s(experiment.created_at) + "\n        "
+            )
+          ])
         ])
-      ])
-    })
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = [
