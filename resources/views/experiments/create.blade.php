@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <experiment-form></experiment-form>
+                <experiment-form-component></experiment-form-component>
             </div>
         </div>
     </div>

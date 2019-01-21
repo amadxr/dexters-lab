@@ -20,8 +20,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
-Vue.component('experiments', require('./components/Experiments.vue'));
-Vue.component('experiment-form', require('./components/ExperimentForm.vue'));
+Vue.component('experiments-list-component', require('./components/ExperimentsListComponent.vue'));
+Vue.component('experiment-form-component', require('./components/ExperimentFormComponent.vue'));
 Vue.component('experiment-component', require('./components/ExperimentComponent.vue'));
 
 /**
