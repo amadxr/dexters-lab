@@ -5,22 +5,7 @@
             <p class="lead">To create your first experiment click the button below.</p>
             <a class="btn btn-primary btn-lg" href="create" role="button">Start experimenting!</a>
         </div>
-        <div class="card mb-3" v-for="experiment in experiments">
-            <div class="card-header">
-                <div class="float-left">
-                    <h5>{{ experiment.title }}</h5>
-                </div>
-                <div class="float-right">
-                    <a href="#" class="btn btn-primary">Details</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <label id="started">Hypothesis: </label> {{ experiment.falsifiable_hypothesis }}
-            </div>
-            <div class="card-footer text-muted text-right">
-                {{ experiment.created_at }}
-            </div>
-        </div>
+        <experiment-component v-for="experiment in experiments" :key="experiment.id"/>
     </div>
 </template>
 
@@ -30,21 +15,20 @@
         data() {
             return {
                 experiments: [],
-                pageCount: 1,
-                endpoint: 'api/experiments?page='
+                endpoint: 'api/experiments'
             };
         },
 
         created() {
             this.fetch();
+            console.log(this.experiments);
         },
 
         methods: {
-            fetch(page = 1) {
-                axios.get(this.endpoint + page)
+            fetch() {
+                axios.get(this.endpoint)
                     .then(({data}) => {
                         this.experiments = data.data;
-                        this.pageCount = data.meta.last_page;
                     });
             }
         }

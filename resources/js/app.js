@@ -22,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('experiments', require('./components/Experiments.vue'));
 Vue.component('experiment-form', require('./components/ExperimentForm.vue'));
+Vue.component('experiment-component', require('./components/ExperimentComponent.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
