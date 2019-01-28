@@ -5,7 +5,7 @@
                 <h5>{{ experiment.title }}</h5>
             </div>
             <div class="float-right">
-                <a href="#" class="btn btn-primary">Details</a>
+                <button type="button" class="btn btn-primary" v-on:click="showDetails">Details</button>
             </div>
         </div>
         <div class="card-body">
@@ -23,6 +23,12 @@
             experiment: {
                 type: Object,
                 required: true
+            }
+        },
+
+        methods: {
+            showDetails() {
+                window.location.href = "show/" + this.experiment.id;
             }
         }
     }
