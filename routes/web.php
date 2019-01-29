@@ -13,3 +13,4 @@
 
 Route::get('/', 'ExperimentController@index')->name('home');
 Route::get('create', 'ExperimentController@create')->name('create');
+Route::get('show/{experiment}', 'ExperimentController@show');

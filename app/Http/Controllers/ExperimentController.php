@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Experiment;
 use Illuminate\Http\Request;
 
 class ExperimentController extends Controller
@@ -14,5 +15,10 @@ class ExperimentController extends Controller
     public function create()
     {
         return view('experiments.create');
+    }
+
+    public function show(Experiment $experiment)
+    {
+        return view('experiments.show', ['experiment', $experiment]);
     }
 }
