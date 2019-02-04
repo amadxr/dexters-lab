@@ -48032,6 +48032,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
 
+    mounted: function mounted() {
+        this.initiateData();
+    },
     data: function data() {
         return {
             errors: [],
@@ -48050,10 +48053,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
+        initiateData: function initiateData() {
+            if (this.detail) {
+                this.experiment = this.detail;
+            }
+        },
         onSubmit: function onSubmit() {
             var _this = this;
 
-            console.log(this.detail);
             this.saved = false;
 
             axios.post('api/experiments', this.experiment).then(function (_ref) {

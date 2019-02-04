@@ -64,7 +64,11 @@
             }
         },
 
-        data() {
+        mounted () {
+            this.initiateData()
+        },
+
+        data () {
             return {
                 errors: [],
                 saved: false,
@@ -81,8 +85,13 @@
         },
 
         methods: {
-            onSubmit() {
-                console.log(this.detail);
+            initiateData () {
+                if (this.detail) {
+                    this.experiment = this.detail;
+                }
+            },
+
+            onSubmit () {
                 this.saved = false;
 
                 axios.post('api/experiments', this.experiment)
@@ -90,16 +99,16 @@
                     .catch(({response}) => this.setErrors(response));
             },
 
-            setErrors(response) {
+            setErrors (response) {
                 this.errors = response.data.errors;
             },
 
-            setSuccessMessage() {
+            setSuccessMessage () {
                 this.reset();
                 this.saved = true;
             },
 
-            reset() {
+            reset () {
                 this.errors = [];
                 this.experiment = {
                     title: null,
