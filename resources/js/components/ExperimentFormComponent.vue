@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 text-right">
+                <div class="col-md-12 text-right" v-if="typeof detail === 'undefined'">
                     <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                 </div>
             </form>
@@ -57,6 +57,12 @@
 
 <script>
     export default {
+        props: {
+            detail: {
+                type: Object,
+                required: false
+            }
+        },
 
         data() {
             return {
@@ -76,12 +82,12 @@
 
         methods: {
             onSubmit() {
+                console.log(this.detail);
                 this.saved = false;
 
                 axios.post('api/experiments', this.experiment)
                     .then(({data}) => this.setSuccessMessage())
                     .catch(({response}) => this.setErrors(response));
-                console.log(this.errors);
             },
 
             setErrors(response) {
