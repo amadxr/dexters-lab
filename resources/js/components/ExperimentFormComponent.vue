@@ -47,7 +47,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 text-right" v-if="typeof detail === 'undefined'">
+                <div class="col-md-12 text-right" v-if="detail">
+                    <button type="submit" class="btn btn-secondary btn-lg">Advanced Config</button>
+                </div>
+                <div class="col-md-12 text-right" v-else>
                     <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                 </div>
             </form>

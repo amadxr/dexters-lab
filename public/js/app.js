@@ -48023,6 +48023,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48368,8 +48371,18 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          typeof _vm.detail === "undefined"
+          _vm.detail
             ? _c("div", { staticClass: "col-md-12 text-right" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary btn-lg",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Advanced Config")]
+                )
+              ])
+            : _c("div", { staticClass: "col-md-12 text-right" }, [
                 _c(
                   "button",
                   {
@@ -48379,7 +48392,6 @@ var render = function() {
                   [_vm._v("Submit")]
                 )
               ])
-            : _vm._e()
         ]
       )
     ])
