@@ -48,13 +48,18 @@
                     </div>
                 </div>
                 <div class="col-md-12 text-right" v-if="detail">
-                    <button type="submit" class="btn btn-secondary btn-lg">Advanced Config</button>
+                    <button type="button" id="show-modal" @click="showModal = true" class="btn btn-secondary btn-lg">Advanced Config</button>
                 </div>
                 <div class="col-md-12 text-right" v-else>
                     <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                 </div>
             </form>
         </div>
+        <modal-component v-if="showModal" @close="showModal = false">
+            <h3 slot="header">Advanced Configuration</h3>
+            <div slot="body">
+            </div>
+        </modal-component>
     </div>
 </template>
 
@@ -68,7 +73,7 @@
         },
 
         mounted () {
-            this.initiateData()
+            this.initiateFormData()
         },
 
         data () {
@@ -83,12 +88,13 @@
                     results: null,
                     validated_learning: null,
                     next_action: null
-                }
+                },
+                showModal: false
             };
         },
 
         methods: {
-            initiateData () {
+            initiateFormData () {
                 if (this.detail) {
                     this.experiment = this.detail;
                 }
