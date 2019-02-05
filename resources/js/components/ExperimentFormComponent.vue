@@ -61,6 +61,9 @@
         <modal-component v-if="showModal" @close="showModal = false">
             <h3 slot="header">Advanced Configuration</h3>
             <div slot="body">
+                <h5>Select the smart view you wish to connect with this experiment</h5>
+                <select id="smartViewSelect">
+                </select>
             </div>
         </modal-component>
     </div>

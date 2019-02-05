@@ -48035,6 +48035,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48442,7 +48445,15 @@ var render = function() {
                 _vm._v("Advanced Configuration")
               ]),
               _vm._v(" "),
-              _c("div", { attrs: { slot: "body" }, slot: "body" })
+              _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+                _c("h5", [
+                  _vm._v(
+                    "Select the smart view you wish to connect with this experiment"
+                  )
+                ]),
+                _vm._v(" "),
+                _c("select", { attrs: { id: "smartViewSelect" } })
+              ])
             ]
           )
         : _vm._e()
