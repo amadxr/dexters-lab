@@ -62,7 +62,10 @@
             <h3 slot="header">Advanced Configuration</h3>
             <div slot="body">
                 <h5>Select the smart view you wish to connect with this experiment</h5>
-                <select id="smartViewSelect">
+                <select id="smartViewSelect" v-model="selected">
+                    <option v-for="(item, key) in smartviews" :value="key">
+                        {{ item }}
+                    </option>
                 </select>
             </div>
         </modal-component>
@@ -87,6 +90,7 @@
                 errors: [],
                 saved: false,
                 connected: false,
+                selected: {},
                 experiment: {
                     title: null,
                     background: null,
@@ -110,7 +114,7 @@
             onSubmit () {
                 this.saved = false;
 
-                axios.post('api/experiments', this.experiment)
+                axios.post(process.env.MIX_APP_URL + '/api/experiments', this.experiment)
                     .then(({data}) => this.setSuccessMessage())
                     .catch(({response}) => this.setErrors(response));
             },
