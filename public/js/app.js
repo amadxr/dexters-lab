@@ -48032,6 +48032,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48048,6 +48051,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             errors: [],
             saved: false,
+            connected: false,
             experiment: {
                 title: null,
                 background: null,
@@ -48118,6 +48122,15 @@ var render = function() {
         ? _c("div", { staticClass: "alert alert-success" }, [
             _c("strong", [_vm._v("Success!")]),
             _vm._v(" Your experiment has been saved successfully.\n    ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.connected
+        ? _c("div", { staticClass: "alert alert-success" }, [
+            _c("strong", [_vm._v("Success!")]),
+            _vm._v(
+              " Your experiment will now be able to track results automatically!\n    "
+            )
           ])
         : _vm._e(),
       _vm._v(" "),

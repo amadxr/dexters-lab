@@ -3,6 +3,9 @@
         <div class="alert alert-success" v-if="saved">
             <strong>Success!</strong> Your experiment has been saved successfully.
         </div>
+        <div class="alert alert-success" v-if="connected">
+            <strong>Success!</strong> Your experiment will now be able to track results automatically!
+        </div>
         <div>
             <form method="post" @submit.prevent="onSubmit">
                 <div class="form-row">
@@ -80,6 +83,7 @@
             return {
                 errors: [],
                 saved: false,
+                connected: false,
                 experiment: {
                     title: null,
                     background: null,
