@@ -6,7 +6,7 @@
             <strong>Success!</strong> Your experiment has been saved successfully.
         </div>
 
-        <div class="alert alert-success" v-if="connected">
+        <div class="alert alert-success" v-if="assigned">
             <strong>Success!</strong> Your experiment will now be able to track results automatically!
         </div>
 
@@ -63,7 +63,7 @@
             </form>
         </div>
 
-        <modal-component v-if="showModal" @close="showModal = false">
+        <modal-component v-if="showModal" @close="onAssign">
             <h3 slot="header">Advanced Configuration</h3>
 
             <div slot="body">
@@ -99,16 +99,26 @@
                 errors: [],
                 smartViews: [],
                 saved: false,
-                connected: false,
-                selected: {},
+                assigned: false,
+                selected: {
+                    id: null,
+                    title: null,
+                    query: null
+                },
                 experiment: {
+                    id: null,
                     title: null,
                     background: null,
                     falsifiable_hypothesis: null,
                     details: null,
                     results: null,
                     validated_learning: null,
-                    next_action: null
+                    next_action: null,
+                    parent_id: null,
+                    smart_view_id: null,
+                    smart_view_query: null,
+                    created_at: null,
+                    updated_at: null
                 },
                 showModal: false
             };
@@ -124,14 +134,13 @@
                             this.smartViews = data;
                         });
                 }
-
             },
 
             onSubmit () {
                 this.saved = false;
 
                 axios.post(process.env.MIX_APP_URL + '/api/experiments', this.experiment)
-                    .then(({data}) => this.setSuccessMessage())
+                    .then(({data}) => this.setSubmitSuccessMessage())
                     .catch(({response}) => this.setErrors(response));
             },
 
@@ -139,7 +148,7 @@
                 this.errors = response.data.errors;
             },
 
-            setSuccessMessage () {
+            setSubmitSuccessMessage () {
                 this.reset();
                 this.saved = true;
             },
@@ -147,14 +156,38 @@
             reset () {
                 this.errors = [];
                 this.experiment = {
+                    id: null,
                     title: null,
                     background: null,
                     falsifiable_hypothesis: null,
                     details: null,
                     results: null,
                     validated_learning: null,
-                    next_action: null
+                    next_action: null,
+                    parent_id: null,
+                    smart_view_id: null,
+                    smart_view_query: null,
+                    created_at: null,
+                    updated_at: null
                 };
+            },
+
+            onAssign () {
+                this.showModal = false;
+
+                var request = {
+                    id: this.experiment.id,
+                    smart_view_id: this.selected.id,
+                    smart_view_query: this.selected.query
+                };
+
+                axios.post(process.env.MIX_APP_URL + '/api/experiments/assign-smart-view', request)
+                    .then(({data}) => this.setAssignSuccessMessage())
+                    .catch(({response}) => this.setErrors(response));
+            },
+
+            setAssignSuccessMessage () {
+                this.assigned = true;
             }
         }
     }

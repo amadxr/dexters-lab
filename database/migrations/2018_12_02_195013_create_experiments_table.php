@@ -22,7 +22,7 @@ class CreateExperimentsTable extends Migration
             $table->text('results')->nullable();
             $table->text('validated_learning')->nullable();
             $table->text('next_action')->nullable();
-            $table->integer('smart_view_id')->nullable();
+            $table->string('smart_view_id')->nullable();
             $table->string('smart_view_query')->nullable();
             $table->integer('parent_id')->nullable();
             $table->timestamps();

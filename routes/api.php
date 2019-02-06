@@ -16,6 +16,10 @@ use Illuminate\Http\Request;
 Route::resource('experiments', 'Api\ExperimentController')
     ->only(['index', 'store', 'show']);
 
+Route::group(['prefix' => 'experiments'], function () {
+    Route::post('/assign-smart-view', 'Api\ExperimentController@assignSmartView');
+});
+
 Route::group(['prefix' => 'smart-views'], function () {
     Route::get('/', 'Api\SmartViewController@index');
 });

@@ -48066,16 +48066,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             errors: [],
             smartViews: [],
             saved: false,
-            connected: false,
-            selected: {},
+            assigned: false,
+            selected: {
+                id: null,
+                title: null,
+                query: null
+            },
             experiment: {
+                id: null,
                 title: null,
                 background: null,
                 falsifiable_hypothesis: null,
                 details: null,
                 results: null,
                 validated_learning: null,
-                next_action: null
+                next_action: null,
+                parent_id: null,
+                smart_view_id: null,
+                smart_view_query: null,
+                created_at: null,
+                updated_at: null
             },
             showModal: false
         };
@@ -48103,7 +48113,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post("http://dexters-lab.test" + '/api/experiments', this.experiment).then(function (_ref2) {
                 var data = _ref2.data;
-                return _this2.setSuccessMessage();
+                return _this2.setSubmitSuccessMessage();
             }).catch(function (_ref3) {
                 var response = _ref3.response;
                 return _this2.setErrors(response);
@@ -48112,21 +48122,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setErrors: function setErrors(response) {
             this.errors = response.data.errors;
         },
-        setSuccessMessage: function setSuccessMessage() {
+        setSubmitSuccessMessage: function setSubmitSuccessMessage() {
             this.reset();
             this.saved = true;
         },
         reset: function reset() {
             this.errors = [];
             this.experiment = {
+                id: null,
                 title: null,
                 background: null,
                 falsifiable_hypothesis: null,
                 details: null,
                 results: null,
                 validated_learning: null,
-                next_action: null
+                next_action: null,
+                parent_id: null,
+                smart_view_id: null,
+                smart_view_query: null,
+                created_at: null,
+                updated_at: null
             };
+        },
+        onAssign: function onAssign() {
+            var _this3 = this;
+
+            this.showModal = false;
+
+            var request = {
+                id: this.experiment.id,
+                smart_view_id: this.selected.id,
+                smart_view_query: this.selected.query
+            };
+
+            axios.post("http://dexters-lab.test" + '/api/experiments/assign-smart-view', request).then(function (_ref4) {
+                var data = _ref4.data;
+                return _this3.setAssignSuccessMessage();
+            }).catch(function (_ref5) {
+                var response = _ref5.response;
+                return _this3.setErrors(response);
+            });
+        },
+        setAssignSuccessMessage: function setAssignSuccessMessage() {
+            this.assigned = true;
         }
     }
 });
@@ -48149,7 +48187,7 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _vm.connected
+      _vm.assigned
         ? _c("div", { staticClass: "alert alert-success" }, [
             _c("strong", [_vm._v("Success!")]),
             _vm._v(
@@ -48452,69 +48490,59 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm.showModal
-        ? _c(
-            "modal-component",
-            {
-              on: {
-                close: function($event) {
-                  _vm.showModal = false
-                }
-              }
-            },
-            [
-              _c("h3", { attrs: { slot: "header" }, slot: "header" }, [
-                _vm._v("Advanced Configuration")
+        ? _c("modal-component", { on: { close: _vm.onAssign } }, [
+            _c("h3", { attrs: { slot: "header" }, slot: "header" }, [
+              _vm._v("Advanced Configuration")
+            ]),
+            _vm._v(" "),
+            _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+              _c("h5", [
+                _vm._v(
+                  "Select the smart view you wish to connect with this experiment"
+                )
               ]),
               _vm._v(" "),
-              _c("div", { attrs: { slot: "body" }, slot: "body" }, [
-                _c("h5", [
-                  _vm._v(
-                    "Select the smart view you wish to connect with this experiment"
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selected,
-                        expression: "selected"
-                      }
-                    ],
-                    attrs: { id: "smartViewSelect" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.selected = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selected,
+                      expression: "selected"
                     }
-                  },
-                  _vm._l(_vm.smartViews, function(smartView) {
-                    return _c("option", { domProps: { value: smartView } }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(smartView.title) +
-                          "\n                "
-                      )
-                    ])
-                  }),
-                  0
-                )
-              ])
-            ]
-          )
+                  ],
+                  attrs: { id: "smartViewSelect" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.smartViews, function(smartView) {
+                  return _c("option", { domProps: { value: smartView } }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(smartView.title) +
+                        "\n                "
+                    )
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
         : _vm._e()
     ],
     1

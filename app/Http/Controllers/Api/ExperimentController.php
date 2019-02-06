@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Experiment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExperiment;
+use App\Http\Requests\AssignSmartView;
 use App\Http\Resources\ExperimentResource;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,22 @@ class ExperimentController extends Controller
 
     public function store(StoreExperiment $request)
     {
-        $experiment = Experiment::create($request->all());
+        $experiment = Experiment::create($request->only([
+            'title',
+            'background',
+            'falsifiable_hypothesis',
+            'details'
+        ]));
+
+        return new ExperimentResource($experiment);
+    }
+
+    public function assignSmartView(AssignSmartView $request)
+    {
+        $experiment = Experiment::findOrFail($request->id);
+        $experiment->smart_view_id = $request->smart_view_id;
+        $experiment->smart_view_query = $request->smart_view_query;
+        $experiment->save();
 
         return new ExperimentResource($experiment);
     }

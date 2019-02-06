@@ -24,6 +24,8 @@ class ExperimentResource extends JsonResource
             'validated_learning' => $this->validated_learning,
             'next_action' => $this->next_action,
             'parent_id' => $this->parent_id,
+            'smart_view_id' => $this->smart_view_id,
+            'smart_view_query' => $this->smart_view_query,
             'created_at' => $this->created_at->format('d M Y'),
             'updated_at' => $this->updated_at->diffForHumans()
         ];
