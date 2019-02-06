@@ -8,10 +8,16 @@ use Illuminate\Http\Request;
 
 class SmartViewController extends Controller
 {
+    protected $client;
+
+    public function __construct()
+    {
+        $this->client = new Client();
+    }
+
     public function index()
     {
-        $client = new Client();
-        $response = $client->get(env('CLOSE_API_URL') . '/saved_search', [
+        $response = $this->client->get(env('CLOSE_API_URL') . '/saved_search', [
             'auth' => [
                 env('CLOSE_USERNAME'),
                 ''
