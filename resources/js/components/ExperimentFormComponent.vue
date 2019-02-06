@@ -44,10 +44,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <textarea rows="8" class="form-control" id="inputResults" placeholder="Results" v-model="experiment.results"></textarea>
+                            <textarea rows="8" class="form-control" id="inputResults" placeholder="Results" v-model="experiment.results" :disabled="true"></textarea>
                         </div>
                         <div class="form-group">
-                            <textarea rows="6" class="form-control" id="inputValidatedLearning" placeholder="Validated Learning" v-model="experiment.validated_learning"></textarea>
+                            <textarea rows="6" class="form-control" id="inputValidatedLearning" placeholder="Validated Learning" v-model="experiment.validated_learning" :disabled="!detail"></textarea>
                         </div>
                         <div class="form-group">
                             <textarea rows="3" class="form-control" id="inputNextAction" placeholder="Next Action" v-model="experiment.next_action"></textarea>

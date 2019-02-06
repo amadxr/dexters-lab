@@ -48379,7 +48379,8 @@ var render = function() {
                     attrs: {
                       rows: "8",
                       id: "inputResults",
-                      placeholder: "Results"
+                      placeholder: "Results",
+                      disabled: true
                     },
                     domProps: { value: _vm.experiment.results },
                     on: {
@@ -48407,7 +48408,8 @@ var render = function() {
                     attrs: {
                       rows: "6",
                       id: "inputValidatedLearning",
-                      placeholder: "Validated Learning"
+                      placeholder: "Validated Learning",
+                      disabled: !_vm.detail
                     },
                     domProps: { value: _vm.experiment.validated_learning },
                     on: {
