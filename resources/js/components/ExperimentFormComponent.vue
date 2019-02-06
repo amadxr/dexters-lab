@@ -63,7 +63,7 @@
             </form>
         </div>
 
-        <modal-component v-if="showModal" @close="onAssign">
+        <modal-component v-if="showModal" @submit="onAssign" @close="showModal = false">
             <h3 slot="header">Advanced Configuration</h3>
 
             <div slot="body">

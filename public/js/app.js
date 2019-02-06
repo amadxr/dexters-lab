@@ -48490,59 +48490,70 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm.showModal
-        ? _c("modal-component", { on: { close: _vm.onAssign } }, [
-            _c("h3", { attrs: { slot: "header" }, slot: "header" }, [
-              _vm._v("Advanced Configuration")
-            ]),
-            _vm._v(" "),
-            _c("div", { attrs: { slot: "body" }, slot: "body" }, [
-              _c("h5", [
-                _vm._v(
-                  "Select the smart view you wish to connect with this experiment"
-                )
+        ? _c(
+            "modal-component",
+            {
+              on: {
+                submit: _vm.onAssign,
+                close: function($event) {
+                  _vm.showModal = false
+                }
+              }
+            },
+            [
+              _c("h3", { attrs: { slot: "header" }, slot: "header" }, [
+                _vm._v("Advanced Configuration")
               ]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.selected,
-                      expression: "selected"
+              _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+                _c("h5", [
+                  _vm._v(
+                    "Select the smart view you wish to connect with this experiment"
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selected,
+                        expression: "selected"
+                      }
+                    ],
+                    attrs: { id: "smartViewSelect" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.selected = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
                     }
-                  ],
-                  attrs: { id: "smartViewSelect" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.selected = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                _vm._l(_vm.smartViews, function(smartView) {
-                  return _c("option", { domProps: { value: smartView } }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(smartView.title) +
-                        "\n                "
-                    )
-                  ])
-                }),
-                0
-              )
-            ])
-          ])
+                  },
+                  _vm._l(_vm.smartViews, function(smartView) {
+                    return _c("option", { domProps: { value: smartView } }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(smartView.title) +
+                          "\n                "
+                      )
+                    ])
+                  }),
+                  0
+                )
+              ])
+            ]
+          )
         : _vm._e()
     ],
     1
@@ -49251,8 +49262,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     methods: {
-        close: function close() {
-            this.$emit('close');
+        submit: function submit() {
+            this.$emit('submit');
         }
     }
 });
@@ -49306,7 +49317,7 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   attrs: { type: "button" },
-                  on: { click: _vm.close }
+                  on: { click: _vm.submit }
                 },
                 [
                   _vm._v(

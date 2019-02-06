@@ -16,7 +16,7 @@
                     <div class="modal-footer">
                         <slot name="footer">
                         </slot>
-                        <button type="button" class="btn btn-primary" @click="close">
+                        <button type="button" class="btn btn-primary" @click="submit">
                             OK                    
                         </button>
                     </div>
@@ -85,8 +85,8 @@
 <script>
     export default {
         methods: {
-            close () {
-                this.$emit('close');
+            submit () {
+                this.$emit('submit');
             }
         }
     };
