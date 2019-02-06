@@ -14,8 +14,7 @@
 
         data() {
             return {
-                experiments: [],
-                endpoint: 'api/experiments'
+                experiments: []
             };
         },
 
@@ -25,7 +24,7 @@
 
         methods: {
             fetch() {
-                axios.get(this.endpoint)
+                axios.get(process.env.MIX_APP_URL + '/api/experiments')
                     .then(({data}) => {
                         this.experiments = data.data;
                     });

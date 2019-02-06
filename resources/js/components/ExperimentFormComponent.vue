@@ -1,11 +1,15 @@
 <template>
+
     <div>
+
         <div class="alert alert-success" v-if="saved">
             <strong>Success!</strong> Your experiment has been saved successfully.
         </div>
+
         <div class="alert alert-success" v-if="connected">
             <strong>Success!</strong> Your experiment will now be able to track results automatically!
         </div>
+
         <div>
             <form method="post" @submit.prevent="onSubmit">
                 <div class="form-row">
@@ -58,18 +62,23 @@
                 </div>
             </form>
         </div>
+
         <modal-component v-if="showModal" @close="showModal = false">
             <h3 slot="header">Advanced Configuration</h3>
+
             <div slot="body">
                 <h5>Select the smart view you wish to connect with this experiment</h5>
+
                 <select id="smartViewSelect" v-model="selected">
-                    <option v-for="(item, key) in smartviews" :value="key">
-                        {{ item }}
+                    <option v-for="smartView in smartViews" :value="smartView">
+                        {{ smartView.title }}
                     </option>
                 </select>
             </div>
         </modal-component>
+
     </div>
+
 </template>
 
 <script>
@@ -88,6 +97,7 @@
         data () {
             return {
                 errors: [],
+                smartViews: [],
                 saved: false,
                 connected: false,
                 selected: {},
@@ -108,7 +118,13 @@
             initiateFormData () {
                 if (this.detail) {
                     this.experiment = this.detail;
+
+                    axios.get(process.env.MIX_APP_URL + '/api/smart-views')
+                        .then(({data}) => {
+                            this.smartViews = data;
+                        });
                 }
+
             },
 
             onSubmit () {

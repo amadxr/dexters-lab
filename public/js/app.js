@@ -47840,8 +47840,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            experiments: [],
-            endpoint: 'api/experiments'
+            experiments: []
         };
     },
     created: function created() {
@@ -47853,7 +47852,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fetch: function fetch() {
             var _this = this;
 
-            axios.get(this.endpoint).then(function (_ref) {
+            axios.get("http://dexters-lab.test" + '/api/experiments').then(function (_ref) {
                 var data = _ref.data;
 
                 _this.experiments = data.data;
@@ -48041,6 +48040,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48056,6 +48064,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             errors: [],
+            smartViews: [],
             saved: false,
             connected: false,
             selected: {},
@@ -48075,21 +48084,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         initiateFormData: function initiateFormData() {
+            var _this = this;
+
             if (this.detail) {
                 this.experiment = this.detail;
+
+                axios.get("http://dexters-lab.test" + '/api/smart-views').then(function (_ref) {
+                    var data = _ref.data;
+
+                    _this.smartViews = data;
+                });
             }
         },
         onSubmit: function onSubmit() {
-            var _this = this;
+            var _this2 = this;
 
             this.saved = false;
 
-            axios.post("http://dexters-lab.test" + '/api/experiments', this.experiment).then(function (_ref) {
-                var data = _ref.data;
-                return _this.setSuccessMessage();
-            }).catch(function (_ref2) {
-                var response = _ref2.response;
-                return _this.setErrors(response);
+            axios.post("http://dexters-lab.test" + '/api/experiments', this.experiment).then(function (_ref2) {
+                var data = _ref2.data;
+                return _this2.setSuccessMessage();
+            }).catch(function (_ref3) {
+                var response = _ref3.response;
+                return _this2.setErrors(response);
             });
         },
         setErrors: function setErrors(response) {
@@ -48484,11 +48501,11 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.smartviews, function(item, key) {
-                    return _c("option", { domProps: { value: key } }, [
+                  _vm._l(_vm.smartViews, function(smartView) {
+                    return _c("option", { domProps: { value: smartView } }, [
                       _vm._v(
                         "\n                    " +
-                          _vm._s(item) +
+                          _vm._s(smartView.title) +
                           "\n                "
                       )
                     ])
