@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\ExperimentResultResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ExperimentResource extends JsonResource
@@ -20,7 +21,7 @@ class ExperimentResource extends JsonResource
             'background' => $this->background,
             'falsifiable_hypothesis' => $this->falsifiable_hypothesis,
             'details' => $this->details,
-            'results' => $this->results,
+            'results' => new ExperimentResultResource($this->whenLoaded('results')),
             'validated_learning' => $this->validated_learning,
             'next_action' => $this->next_action,
             'parent_id' => $this->parent_id,

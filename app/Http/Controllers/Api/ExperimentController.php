@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Experiment;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreExperiment;
 use App\Http\Requests\AssignSmartView;
+use App\Http\Requests\StoreExperiment;
 use App\Http\Resources\ExperimentResource;
 use App\Services\ExperimentResultsService;
 use Illuminate\Http\Request;
@@ -59,6 +59,6 @@ class ExperimentController extends Controller
 
         $experiment->save();
 
-        return new ExperimentResource($experiment);
+        return new ExperimentResource($experiment->load('results'));
     }
 }
