@@ -48078,7 +48078,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 background: null,
                 falsifiable_hypothesis: null,
                 details: null,
-                results: null,
+                results: {
+                    id: null,
+                    experiment_id: null,
+                    leads_count: null,
+                    opportunities_count: null,
+                    opportunities_value: null
+                },
                 validated_learning: null,
                 next_action: null,
                 parent_id: null,
@@ -48134,7 +48140,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 background: null,
                 falsifiable_hypothesis: null,
                 details: null,
-                results: null,
+                results: {
+                    id: null,
+                    experiment_id: null,
+                    leads_count: null,
+                    opportunities_count: null,
+                    opportunities_value: null
+                },
                 validated_learning: null,
                 next_action: null,
                 parent_id: null,
@@ -48147,8 +48159,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         onAssign: function onAssign() {
             var _this3 = this;
 
-            this.showModal = false;
-
             var request = {
                 id: this.experiment.id,
                 smart_view_id: this.selected.id,
@@ -48157,14 +48167,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post("http://dexters-lab.test" + '/api/experiments/assign-smart-view', request).then(function (_ref4) {
                 var data = _ref4.data;
-                return _this3.setAssignSuccessMessage();
+                return _this3.setAssignSuccessMessage({ data: data }.data);
             }).catch(function (_ref5) {
                 var response = _ref5.response;
                 return _this3.setErrors(response);
             });
+
+            this.showModal = false;
         },
-        setAssignSuccessMessage: function setAssignSuccessMessage() {
+        setAssignSuccessMessage: function setAssignSuccessMessage(data) {
             this.assigned = true;
+            this.experiment.results = data.data.results;
         }
     }
 });

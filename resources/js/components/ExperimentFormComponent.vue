@@ -111,7 +111,13 @@
                     background: null,
                     falsifiable_hypothesis: null,
                     details: null,
-                    results: null,
+                    results: {
+                        id: null,
+                        experiment_id: null,
+                        leads_count: null,
+                        opportunities_count: null,
+                        opportunities_value: null
+                    },
                     validated_learning: null,
                     next_action: null,
                     parent_id: null,
@@ -161,7 +167,13 @@
                     background: null,
                     falsifiable_hypothesis: null,
                     details: null,
-                    results: null,
+                    results: {
+                        id: null,
+                        experiment_id: null,
+                        leads_count: null,
+                        opportunities_count: null,
+                        opportunities_value: null
+                    },
                     validated_learning: null,
                     next_action: null,
                     parent_id: null,
@@ -173,8 +185,6 @@
             },
 
             onAssign () {
-                this.showModal = false;
-
                 var request = {
                     id: this.experiment.id,
                     smart_view_id: this.selected.id,
@@ -182,12 +192,15 @@
                 };
 
                 axios.post(process.env.MIX_APP_URL + '/api/experiments/assign-smart-view', request)
-                    .then(({data}) => this.setAssignSuccessMessage())
+                    .then(({data}) => this.setAssignSuccessMessage({data}.data))
                     .catch(({response}) => this.setErrors(response));
+
+                this.showModal = false;
             },
 
-            setAssignSuccessMessage () {
+            setAssignSuccessMessage (data) {
                 this.assigned = true;
+                this.experiment.results = data.data.results;
             }
         }
     }
