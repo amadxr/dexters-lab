@@ -7,10 +7,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExperiment;
 use App\Http\Requests\AssignSmartView;
 use App\Http\Resources\ExperimentResource;
+use App\Services\ExperimentResultsService;
 use Illuminate\Http\Request;
 
 class ExperimentController extends Controller
 {
+    protected $experimentResultsService;
+
+    public function __construct(ExperimentResultsService $resultsService)
+    {
+        $this->experimentResultsService = $resultsService;
+    }
+
     public function index()
     {
         $experiments = Experiment::orderBy('created_at', 'desc')->get();
@@ -40,6 +48,9 @@ class ExperimentController extends Controller
         $experiment = Experiment::findOrFail($request->id);
         $experiment->smart_view_id = $request->smart_view_id;
         $experiment->smart_view_query = $request->smart_view_query;
+
+        $results = $this->experimentResultsService->buildResults($experiment->smart_view_query);
+
         $experiment->save();
 
         return new ExperimentResource($experiment);
