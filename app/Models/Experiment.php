@@ -20,7 +20,7 @@ class Experiment extends Model
         return $this->belongsTo('App\Models\Experiment', 'parent_id');
     }
 
-    public function result()
+    public function results()
     {
         return $this->hasOne('App\Models\ExperimentResult');
     }
