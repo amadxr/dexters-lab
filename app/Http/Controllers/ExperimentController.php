@@ -19,6 +19,6 @@ class ExperimentController extends Controller
 
     public function show(Experiment $experiment)
     {
-        return view('experiments.show', ['experiment' => $experiment]);
+        return view('experiments.show', ['experiment' => $experiment->load('results')]);
     }
 }

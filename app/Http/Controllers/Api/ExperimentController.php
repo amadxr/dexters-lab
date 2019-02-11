@@ -21,7 +21,7 @@ class ExperimentController extends Controller
 
     public function index()
     {
-        $experiments = Experiment::orderBy('created_at', 'desc')->get();
+        $experiments = Experiment::with(['results'])->orderBy('created_at', 'desc')->get();
 
         return ExperimentResource::collection($experiments);
     }
@@ -40,7 +40,7 @@ class ExperimentController extends Controller
             'details'
         ]));
 
-        return new ExperimentResource($experiment);
+        return new ExperimentResource($experiment->load('results'));
     }
 
     public function assignSmartView(AssignSmartView $request)
