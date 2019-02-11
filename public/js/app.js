@@ -14061,6 +14061,7 @@ Vue.component('experiments-list-component', __webpack_require__(40));
 Vue.component('experiment-form-component', __webpack_require__(43));
 Vue.component('experiment-component', __webpack_require__(46));
 Vue.component('modal-component', __webpack_require__(49));
+Vue.component('variable-search-component', __webpack_require__(61));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -48049,6 +48050,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48342,39 +48345,50 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.experiment.details,
-                        expression: "experiment.details"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      rows: "6",
-                      id: "inputDetails",
-                      placeholder: "Details"
-                    },
-                    domProps: { value: _vm.experiment.details },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.experiment.details,
+                          expression: "experiment.details"
                         }
-                        _vm.$set(_vm.experiment, "details", $event.target.value)
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        rows: "6",
+                        id: "inputDetails",
+                        placeholder: "Details"
+                      },
+                      domProps: { value: _vm.experiment.details },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.experiment,
+                            "details",
+                            $event.target.value
+                          )
+                        }
                       }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.details
-                    ? _c("span", { staticClass: "help-block text-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.details[0]))
-                      ])
-                    : _vm._e()
-                ])
+                    }),
+                    _vm._v(" "),
+                    _c("variable-search-component"),
+                    _vm._v(" "),
+                    _vm.errors.details
+                      ? _c("span", { staticClass: "help-block text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.details[0]))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
@@ -49377,6 +49391,147 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(63)
+/* template */
+var __vue_template__ = __webpack_require__(62)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/VariableSearchComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-430de604", Component.options)
+  } else {
+    hotAPI.reload("data-v-430de604", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.inputText,
+              expression: "inputText"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "inputDetail", placeholder: "Details" },
+          domProps: { value: _vm.inputText },
+          on: {
+            input: [
+              function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.inputText = $event.target.value
+              },
+              _vm.search
+            ]
+          }
+        })
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-430de604", module.exports)
+  }
+}
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            variables: [],
+            inputText: ""
+        };
+    },
+
+
+    methods: {
+        search: function search() {
+            var _this = this;
+
+            console.log(this.inputText.length);
+            if (this.inputText.length >= 3) {
+                axios.get("http://dexters-lab.test" + '/api/experiment-variables').then(function (_ref) {
+                    var data = _ref.data;
+
+                    _this.variables = data.data;
+                });
+            }
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

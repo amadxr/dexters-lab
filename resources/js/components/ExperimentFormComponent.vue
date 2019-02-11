@@ -39,6 +39,8 @@
                         </div>
                         <div class="form-group">
                             <textarea rows="6" class="form-control" id="inputDetails" placeholder="Details" v-model="experiment.details"></textarea>
+                            <variable-search-component>
+                            </variable-search-component>
                             <span v-if="errors.details" class="help-block text-danger">{{ errors.details[0] }}</span>
                         </div>
                     </div>
