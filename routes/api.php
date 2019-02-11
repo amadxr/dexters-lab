@@ -23,3 +23,6 @@ Route::group(['prefix' => 'experiments'], function () {
 Route::group(['prefix' => 'smart-views'], function () {
     Route::get('/', 'Api\SmartViewController@index');
 });
+
+Route::resource('tags', 'Api\TagController')
+    ->only(['index']);

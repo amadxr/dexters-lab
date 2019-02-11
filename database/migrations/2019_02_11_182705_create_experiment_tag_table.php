@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExperimentExperimentVariableTable extends Migration
+class CreateExperimentTagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateExperimentExperimentVariableTable extends Migration
      */
     public function up()
     {
-        Schema::create('experiment_experiment_variable', function (Blueprint $table) {
+        Schema::create('experiment_tag', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('experiment_id')->unsigned();
@@ -23,10 +23,10 @@ class CreateExperimentExperimentVariableTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->integer('experiment_variable_id')->unsigned();
-            $table->foreign('experiment_variable_id')
+            $table->integer('tag_id')->unsigned();
+            $table->foreign('tag_id')
                 ->references('id')
-                ->on('experiment_variables')
+                ->on('tags')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -41,6 +41,6 @@ class CreateExperimentExperimentVariableTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('experiment_experiment_variable');
+        Schema::dropIfExists('experiment_tag');
     }
 }
