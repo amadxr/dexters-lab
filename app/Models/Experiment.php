@@ -24,4 +24,9 @@ class Experiment extends Model
     {
         return $this->hasOne('App\Models\ExperimentResult');
     }
+
+    public function variables()
+    {
+        return $this->belongsToMany('App\Models\ExperimentVariable');
+    }
 }
