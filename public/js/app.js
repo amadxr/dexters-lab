@@ -14061,7 +14061,7 @@ Vue.component('experiments-list-component', __webpack_require__(40));
 Vue.component('experiment-form-component', __webpack_require__(43));
 Vue.component('experiment-component', __webpack_require__(46));
 Vue.component('modal-component', __webpack_require__(49));
-Vue.component('variable-search-component', __webpack_require__(61));
+Vue.component('tag-search-component', __webpack_require__(64));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -48080,7 +48080,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: null,
                 background: null,
                 falsifiable_hypothesis: null,
-                details: null,
+                tags: [],
                 results: {
                     id: null,
                     experiment_id: null,
@@ -48142,7 +48142,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: null,
                 background: null,
                 falsifiable_hypothesis: null,
-                details: null,
+                tags: [],
                 results: {
                     id: null,
                     experiment_id: null,
@@ -48349,41 +48349,19 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.experiment.details,
-                          expression: "experiment.details"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        rows: "6",
-                        id: "inputDetails",
-                        placeholder: "Details"
-                      },
-                      domProps: { value: _vm.experiment.details },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.experiment,
-                            "details",
-                            $event.target.value
-                          )
-                        }
+                    _c("tag-search-component", {
+                      model: {
+                        value: _vm.experiment.tags,
+                        callback: function($$v) {
+                          _vm.$set(_vm.experiment, "tags", $$v)
+                        },
+                        expression: "experiment.tags"
                       }
                     }),
                     _vm._v(" "),
-                    _c("variable-search-component"),
-                    _vm._v(" "),
-                    _vm.errors.details
+                    _vm.errors.tags
                       ? _c("span", { staticClass: "help-block text-danger" }, [
-                          _vm._v(_vm._s(_vm.errors.details[0]))
+                          _vm._v(_vm._s(_vm.errors.tags[0]))
                         ])
                       : _vm._e()
                   ],
@@ -49396,19 +49374,26 @@ if (false) {
 /* 58 */,
 /* 59 */,
 /* 60 */,
-/* 61 */
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(67)
+}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(63)
+var __vue_script__ = __webpack_require__(65)
 /* template */
-var __vue_template__ = __webpack_require__(62)
+var __vue_template__ = __webpack_require__(66)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -49421,7 +49406,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/js/components/VariableSearchComponent.vue"
+Component.options.__file = "resources/js/components/TagSearchComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -49430,9 +49415,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-430de604", Component.options)
+    hotAPI.createRecord("data-v-5ba3cd34", Component.options)
   } else {
-    hotAPI.reload("data-v-430de604", Component.options)
+    hotAPI.reload("data-v-5ba3cd34", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -49443,56 +49428,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.inputText,
-              expression: "inputText"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", id: "inputDetail", placeholder: "Details" },
-          domProps: { value: _vm.inputText },
-          on: {
-            input: [
-              function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.inputText = $event.target.value
-              },
-              _vm.search
-            ]
-          }
-        })
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-430de604", module.exports)
-  }
-}
-
-/***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49507,12 +49443,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        value: {
+            type: Array,
+            required: true
+        }
+    },
+
     data: function data() {
         return {
-            variables: [],
-            inputText: ""
+            hints: [],
+            key: ""
         };
     },
 
@@ -49521,17 +49485,180 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         search: function search() {
             var _this = this;
 
-            console.log(this.inputText.length);
-            if (this.inputText.length >= 3) {
-                axios.get("http://dexters-lab.test" + '/api/experiment-variables').then(function (_ref) {
+            if (this.key.length >= 3) {
+                axios.get("http://dexters-lab.test" + '/api/tags', {
+                    params: {
+                        key: this.key
+                    }
+                }).then(function (_ref) {
                     var data = _ref.data;
 
-                    _this.variables = data.data;
+                    _this.hints = data.data;
                 });
+            } else {
+                this.hints.length = 0;
             }
+        },
+        addToTags: function addToTags(tag) {
+            var newTags = this.value.concat([tag]);
+            this.$emit('input', newTags);
+            this.key = "";
+            this.hints.length = 0;
+        },
+        deleteFromTags: function deleteFromTags(index) {
+            var newTags = this.value.slice(0, index).concat(this.value.slice(index + 1));
+            this.$emit('input', newTags);
         }
     }
 });
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.key,
+                expression: "key"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", id: "inputTags", placeholder: "Tags" },
+            domProps: { value: _vm.key },
+            on: {
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.key = $event.target.value
+                },
+                _vm.search
+              ]
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _vm.hints.length > 0
+            ? _c(
+                "div",
+                { staticClass: "list-group" },
+                _vm._l(_vm.hints, function(tag) {
+                  return _c(
+                    "button",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.addToTags(tag)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(tag.name) +
+                          "\n                    "
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          _vm._l(_vm.value, function(tag, index) {
+            return _c(
+              "span",
+              {
+                staticClass: "badge badge-primary tag-badge",
+                on: {
+                  click: function($event) {
+                    _vm.deleteFromTags(index)
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(tag.name) +
+                    "\n                "
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5ba3cd34", module.exports)
+  }
+}
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(68);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(53)("394e8fdd", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ba3cd34\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TagSearchComponent.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ba3cd34\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TagSearchComponent.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(52)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.tag-badge {\n    margin-left: 0.3em;\n    margin-right: 0.3em;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

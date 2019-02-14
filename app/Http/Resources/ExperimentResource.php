@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\ExperimentResultResource;
+use App\Http\Resources\TagResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ExperimentResource extends JsonResource
@@ -20,7 +21,7 @@ class ExperimentResource extends JsonResource
             'title' => $this->title,
             'background' => $this->background,
             'falsifiable_hypothesis' => $this->falsifiable_hypothesis,
-            'details' => $this->details,
+            'tags' => TagResource::collection($this->tags),
             'results' => new ExperimentResultResource($this->whenLoaded('results')),
             'validated_learning' => $this->validated_learning,
             'next_action' => $this->next_action,

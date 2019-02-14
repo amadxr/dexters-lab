@@ -19,7 +19,16 @@ class TagsTableSeeder extends Seeder
                 'name' => 'ruby on rails'
             ],
             [
+                'name' => 'ruby'
+            ],
+            [
                 'name' => 'blockchain'
+            ],
+            [
+                'name' => 'react'
+            ],
+            [
+                'name' => 'react native'
             ]
         ]);
     }

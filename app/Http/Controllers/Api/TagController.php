@@ -13,10 +13,12 @@ class TagController extends Controller
     {
         $tags = Tag::all();
 
-        if (isset($request->textInput)) {
-            $filteredTags = $tags->filter(function ($tag) use ($request) {
-                $substring = substr($tag->name, 0, strlen($request->textInput));
-                return $substring == $request->textInput;
+        if (isset($request->key)) {
+            $key = $request->key;
+
+            $filteredTags = $tags->filter(function ($tag) use ($key) {
+                $substring = substr($tag->name, 0, strlen($key));
+                return $substring == $key;
             });
 
             $tags = $filteredTags;

@@ -38,10 +38,10 @@
                             <span v-if="errors.falsifiable_hypothesis" class="help-block text-danger">{{ errors.falsifiable_hypothesis[0] }}</span>
                         </div>
                         <div class="form-group">
-                            <textarea rows="6" class="form-control" id="inputDetails" placeholder="Details" v-model="experiment.details"></textarea>
-                            <variable-search-component>
-                            </variable-search-component>
-                            <span v-if="errors.details" class="help-block text-danger">{{ errors.details[0] }}</span>
+                            <tag-search-component 
+                                v-model="experiment.tags">
+                            </tag-search-component>
+                            <span v-if="errors.tags" class="help-block text-danger">{{ errors.tags[0] }}</span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -112,7 +112,7 @@
                     title: null,
                     background: null,
                     falsifiable_hypothesis: null,
-                    details: null,
+                    tags: [],
                     results: {
                         id: null,
                         experiment_id: null,
@@ -128,7 +128,7 @@
                     created_at: null,
                     updated_at: null
                 },
-                showModal: false
+                showModal: false,
             };
         },
 
@@ -168,7 +168,7 @@
                     title: null,
                     background: null,
                     falsifiable_hypothesis: null,
-                    details: null,
+                    tags: [],
                     results: {
                         id: null,
                         experiment_id: null,

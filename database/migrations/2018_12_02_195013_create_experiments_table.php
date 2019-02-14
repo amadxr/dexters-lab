@@ -18,7 +18,6 @@ class CreateExperimentsTable extends Migration
             $table->string('title');
             $table->text('background');
             $table->text('falsifiable_hypothesis');
-            $table->text('details');
             $table->text('validated_learning')->nullable();
             $table->text('next_action')->nullable();
             $table->string('smart_view_id')->nullable();

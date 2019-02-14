@@ -21,7 +21,7 @@ class ExperimentController extends Controller
 
     public function index()
     {
-        $experiments = Experiment::with(['results'])->orderBy('created_at', 'desc')->get();
+        $experiments = Experiment::with(['tags', 'results'])->orderBy('created_at', 'desc')->get();
 
         return ExperimentResource::collection($experiments);
     }
@@ -33,14 +33,23 @@ class ExperimentController extends Controller
 
     public function store(StoreExperiment $request)
     {
+        $tagIds = collect($request->tags)->map(function ($tag) {
+            if ($tag['id'] != null) {
+                return $tag['id'];
+            } else {
+                return;
+            }
+        });
+
         $experiment = Experiment::create($request->only([
             'title',
             'background',
-            'falsifiable_hypothesis',
-            'details'
+            'falsifiable_hypothesis'
         ]));
 
-        return new ExperimentResource($experiment->load('results'));
+        $experiment->tags()->sync($tagIds);
+
+        return new ExperimentResource($experiment->load('tags', 'results'));
     }
 
     public function assignSmartView(AssignSmartView $request)
@@ -59,6 +68,6 @@ class ExperimentController extends Controller
 
         $experiment->save();
 
-        return new ExperimentResource($experiment->load('results'));
+        return new ExperimentResource($experiment->load('tags', 'results'));
     }
 }
