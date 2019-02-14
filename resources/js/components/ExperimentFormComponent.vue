@@ -1,15 +1,12 @@
 <template>
 
     <div>
-
         <div class="alert alert-success" v-if="saved">
             <strong>Success!</strong> Your experiment has been saved successfully.
         </div>
-
         <div class="alert alert-success" v-if="assigned">
             <strong>Success!</strong> Your experiment will now be able to track results automatically!
         </div>
-
         <div>
             <form method="post" @submit.prevent="onSubmit">
                 <div class="form-row">
@@ -45,9 +42,19 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <textarea rows="8" class="form-control" id="inputResults" placeholder="Results" v-model="experiment.results" :disabled="true"></textarea>
-                        </div>
+                        <form-field-component 
+                            v-model="experiment.results">
+                            <div slot="input" class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Results</h5>
+                                    <div v-if="experiment.results" class="card-text">
+                                        <p>Number of Leads: {{ experiment.results.leads_count }}</p>
+                                        <p>Number of Opportunities: {{ experiment.results.opportunities_count }}</p>
+                                        <p>Value per month: ${{ experiment.results.opportunities_value }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form-field-component>
                         <div class="form-group">
                             <textarea rows="6" class="form-control" id="inputValidatedLearning" placeholder="Validated Learning" v-model="experiment.validated_learning" :disabled="!detail"></textarea>
                         </div>
@@ -79,9 +86,7 @@
                 </select>
             </div>
         </modal-component>
-
     </div>
-
 </template>
 
 <script>

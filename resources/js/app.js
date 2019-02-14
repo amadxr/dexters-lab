@@ -25,6 +25,7 @@ Vue.component('experiment-form-component', require('./components/ExperimentFormC
 Vue.component('experiment-component', require('./components/ExperimentComponent.vue'));
 Vue.component('modal-component', require('./components/ModalComponent.vue'));
 Vue.component('tag-search-component', require('./components/TagSearchComponent.vue'));
+Vue.component('form-field-component', require('./components/FormFieldComponent.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

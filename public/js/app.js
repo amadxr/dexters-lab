@@ -14062,6 +14062,7 @@ Vue.component('experiment-form-component', __webpack_require__(43));
 Vue.component('experiment-component', __webpack_require__(46));
 Vue.component('modal-component', __webpack_require__(49));
 Vue.component('tag-search-component', __webpack_require__(64));
+Vue.component('form-field-component', __webpack_require__(69));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -48053,6 +48054,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48370,101 +48376,140 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
+              _c(
+                "div",
+                { staticClass: "col-md-6" },
+                [
+                  _c(
+                    "form-field-component",
+                    {
+                      model: {
                         value: _vm.experiment.results,
+                        callback: function($$v) {
+                          _vm.$set(_vm.experiment, "results", $$v)
+                        },
                         expression: "experiment.results"
                       }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      rows: "8",
-                      id: "inputResults",
-                      placeholder: "Results",
-                      disabled: true
                     },
-                    domProps: { value: _vm.experiment.results },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          attrs: { slot: "input" },
+                          slot: "input"
+                        },
+                        [
+                          _c("div", { staticClass: "card-body" }, [
+                            _c("h5", { staticClass: "card-title" }, [
+                              _vm._v("Results")
+                            ]),
+                            _vm._v(" "),
+                            _vm.experiment.results
+                              ? _c("div", { staticClass: "card-text" }, [
+                                  _c("p", [
+                                    _vm._v(
+                                      "Number of Leads: " +
+                                        _vm._s(
+                                          _vm.experiment.results.leads_count
+                                        )
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _vm._v(
+                                      "Number of Opportunities: " +
+                                        _vm._s(
+                                          _vm.experiment.results
+                                            .opportunities_count
+                                        )
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _vm._v(
+                                      "Value per month: $" +
+                                        _vm._s(
+                                          _vm.experiment.results
+                                            .opportunities_value
+                                        )
+                                    )
+                                  ])
+                                ])
+                              : _vm._e()
+                          ])
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.experiment.validated_learning,
+                          expression: "experiment.validated_learning"
                         }
-                        _vm.$set(_vm.experiment, "results", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.experiment.validated_learning,
-                        expression: "experiment.validated_learning"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      rows: "6",
-                      id: "inputValidatedLearning",
-                      placeholder: "Validated Learning",
-                      disabled: !_vm.detail
-                    },
-                    domProps: { value: _vm.experiment.validated_learning },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        rows: "6",
+                        id: "inputValidatedLearning",
+                        placeholder: "Validated Learning",
+                        disabled: !_vm.detail
+                      },
+                      domProps: { value: _vm.experiment.validated_learning },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.experiment,
+                            "validated_learning",
+                            $event.target.value
+                          )
                         }
-                        _vm.$set(
-                          _vm.experiment,
-                          "validated_learning",
-                          $event.target.value
-                        )
                       }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.experiment.next_action,
-                        expression: "experiment.next_action"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      rows: "3",
-                      id: "inputNextAction",
-                      placeholder: "Next Action"
-                    },
-                    domProps: { value: _vm.experiment.next_action },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.experiment.next_action,
+                          expression: "experiment.next_action"
                         }
-                        _vm.$set(
-                          _vm.experiment,
-                          "next_action",
-                          $event.target.value
-                        )
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        rows: "3",
+                        id: "inputNextAction",
+                        placeholder: "Next Action"
+                      },
+                      domProps: { value: _vm.experiment.next_action },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.experiment,
+                            "next_action",
+                            $event.target.value
+                          )
+                        }
                       }
-                    }
-                  })
-                ])
-              ])
+                    })
+                  ])
+                ],
+                1
+              )
             ]),
             _vm._v(" "),
             _vm.detail
@@ -49691,6 +49736,99 @@ exports.push([module.i, "\n.tag-badge {\n    margin-left: 0.3em;\n    margin-rig
 
 // exports
 
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(70)
+/* template */
+var __vue_template__ = __webpack_require__(71)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/FormFieldComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3a0d559c", Component.options)
+  } else {
+    hotAPI.reload("data-v-3a0d559c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        value: {
+            type: Object
+        }
+    }
+});
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "form-group" }, [_vm._t("input")], 2)
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3a0d559c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
