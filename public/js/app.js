@@ -48052,6 +48052,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48483,6 +48484,16 @@ var render = function() {
                   )
                 ])
               : _c("div", { staticClass: "col-md-12 text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary btn-lg",
+                      staticStyle: { display: "none" },
+                      attrs: { type: "submit", disabled: "" }
+                    },
+                    [_vm._v("Submit")]
+                  ),
+                  _vm._v(" "),
                   _c(
                     "button",
                     {
@@ -49482,7 +49493,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
-        search: function search() {
+        searchTag: function searchTag() {
             var _this = this;
 
             if (this.key.length >= 3) {
@@ -49496,6 +49507,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this.hints = data.data;
                 });
             } else {
+                this.hints.length = 0;
+            }
+        },
+        createTag: function createTag() {
+            if (this.key.length >= 3) {
+                var newTags = this.value.concat([{
+                    'id': null,
+                    'name': this.key
+                }]);
+
+                this.$emit('input', newTags);
+                this.key = "";
                 this.hints.length = 0;
             }
         },
@@ -49544,8 +49567,17 @@ var render = function() {
                   }
                   _vm.key = $event.target.value
                 },
-                _vm.search
-              ]
+                _vm.searchTag
+              ],
+              keyup: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.createTag($event)
+              }
             }
           })
         ]),

@@ -29,6 +29,12 @@ class TagsTableSeeder extends Seeder
             ],
             [
                 'name' => 'react native'
+            ],
+            [
+                'name' => 'automated qa'
+            ],
+            [
+                'name' => 'noram'
             ]
         ]);
     }

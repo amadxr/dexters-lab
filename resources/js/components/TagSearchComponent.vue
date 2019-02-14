@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="inputTags" placeholder="Tags" v-model="key" @input="search">
+                    <input type="text" class="form-control" id="inputTags" placeholder="Tags" v-model="key" @input="searchTag" v-on:keyup.enter="createTag">
                 </div>
                 <div class="form-group">
                     <div class="list-group" v-if="hints.length > 0">
@@ -46,7 +46,7 @@
         },
 
         methods: {
-            search () {
+            searchTag () {
                 if (this.key.length >= 3) {
                     axios.get(process.env.MIX_APP_URL + '/api/tags', {
                         params: {
@@ -56,6 +56,19 @@
                             this.hints = data.data;
                         });
                 } else {
+                    this.hints.length = 0;
+                }
+            },
+
+            createTag () {
+                if (this.key.length >= 3) {
+                    var newTags = this.value.concat([{
+                        'id': null,
+                        'name': this.key
+                    }]);
+
+                    this.$emit('input', newTags);
+                    this.key = "";
                     this.hints.length = 0;
                 }
             },
