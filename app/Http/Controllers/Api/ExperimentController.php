@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Experiment;
+use App\Models\Tag;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssignSmartView;
 use App\Http\Requests\StoreExperiment;
@@ -33,11 +34,17 @@ class ExperimentController extends Controller
 
     public function store(StoreExperiment $request)
     {
-        $tagIds = collect($request->tags)->map(function ($tag) {
+        $tagIds = [];
+
+        collect($request->tags)->each(function ($tag) use (&$tagIds) {
             if ($tag['id'] != null) {
-                return $tag['id'];
+                array_push($tagIds, $tag['id']);
             } else {
-                return;
+                $newTag = Tag::create([
+                    'name' => $tag['name']
+                ]);
+
+                array_push($tagIds, $newTag->id);
             }
         });
 
