@@ -13,10 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::resource('experiments', 'Api\ExperimentController')
-    ->only(['index', 'store', 'show']);
-
 Route::group(['prefix' => 'experiments'], function () {
+    Route::get('/', 'Api\ExperimentController@index');
+    Route::post('/', 'Api\ExperimentController@store');
     Route::post('/assign-smart-view', 'Api\ExperimentController@assignSmartView');
 });
 
@@ -24,5 +23,6 @@ Route::group(['prefix' => 'smart-views'], function () {
     Route::get('/', 'Api\SmartViewController@index');
 });
 
-Route::resource('tags', 'Api\TagController')
-    ->only(['index']);
+Route::group(['prefix' => 'tags'], function () {
+    Route::get('/', 'Api\TagController@index');
+});
