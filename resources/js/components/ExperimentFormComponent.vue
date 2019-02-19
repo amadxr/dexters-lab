@@ -52,8 +52,10 @@
                                     <h5 class="card-title">Results</h5>
                                     <div v-if="experiment.results" class="card-text">
                                         <p>Number of Leads: {{ experiment.results.leads_count }}</p>
-                                        <p>Number of Opportunities: {{ experiment.results.opportunities_count }}</p>
-                                        <p>Annual Value: ${{ experiment.results.opportunities_annual_value }}</p>
+                                        <p>Number of Won Opportunities: {{ experiment.results.won_opportunities_count }}</p>
+                                        <p>Won Annual Value: ${{ experiment.results.won_opportunities_annual_value }}</p>
+                                        <p>Number of Open Opportunities: {{ experiment.results.open_opportunities_count }}</p>
+                                        <p>Open Annual Value: ${{ experiment.results.open_opportunities_annual_value }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -127,8 +129,10 @@
                         id: null,
                         experiment_id: null,
                         leads_count: null,
-                        opportunities_count: null,
-                        opportunities_annual_value: null
+                        won_opportunities_count: null,
+                        won_opportunities_annual_value: null,
+                        open_opportunities_count: null,
+                        open_oppportunities_annual_value: null
                     },
                     validated_learning: null,
                     next_action: null,
@@ -192,8 +196,10 @@
                         id: null,
                         experiment_id: null,
                         leads_count: null,
-                        opportunities_count: null,
-                        opportunities_annual_value: null
+                        won_opportunities_count: null,
+                        won_opportunities_annual_value: null,
+                        open_opportunities_count: null,
+                        open_opportunities_annual_value: null
                     },
                     validated_learning: null,
                     next_action: null,

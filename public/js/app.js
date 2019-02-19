@@ -48062,6 +48062,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48096,8 +48098,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     id: null,
                     experiment_id: null,
                     leads_count: null,
-                    opportunities_count: null,
-                    opportunities_annual_value: null
+                    won_opportunities_count: null,
+                    won_opportunities_annual_value: null,
+                    open_opportunities_count: null,
+                    open_oppportunities_annual_value: null
                 },
                 validated_learning: null,
                 next_action: null,
@@ -48169,8 +48173,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     id: null,
                     experiment_id: null,
                     leads_count: null,
-                    opportunities_count: null,
-                    opportunities_annual_value: null
+                    won_opportunities_count: null,
+                    won_opportunities_annual_value: null,
+                    open_opportunities_count: null,
+                    open_opportunities_annual_value: null
                 },
                 validated_learning: null,
                 next_action: null,
@@ -48444,20 +48450,40 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("p", [
                                     _vm._v(
-                                      "Number of Opportunities: " +
+                                      "Number of Won Opportunities: " +
                                         _vm._s(
                                           _vm.experiment.results
-                                            .opportunities_count
+                                            .won_opportunities_count
                                         )
                                     )
                                   ]),
                                   _vm._v(" "),
                                   _c("p", [
                                     _vm._v(
-                                      "Annual Value: $" +
+                                      "Won Annual Value: $" +
                                         _vm._s(
                                           _vm.experiment.results
-                                            .opportunities_annual_value
+                                            .won_opportunities_annual_value
+                                        )
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _vm._v(
+                                      "Number of Open Opportunities: " +
+                                        _vm._s(
+                                          _vm.experiment.results
+                                            .open_opportunities_count
+                                        )
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _vm._v(
+                                      "Open Annual Value: $" +
+                                        _vm._s(
+                                          _vm.experiment.results
+                                            .open_opportunities_annual_value
                                         )
                                     )
                                   ])

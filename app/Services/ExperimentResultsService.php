@@ -28,7 +28,12 @@ class ExperimentResultsService
 
         $rawLeads = collect(json_decode($response->getBody(), true)['data']);
 
-        $opportunities = [
+        $wonOpportunities = [
+            'count' => 0,
+            'annual_value' => 0
+        ];
+
+        $openOpportunities = [
             'count' => 0,
             'annual_value' => 0
         ];
@@ -37,20 +42,28 @@ class ExperimentResultsService
             'openRate' => 0
         ];*/
 
-        $rawLeads->each(function ($lead) use (&$opportunities) {
+        $rawLeads->each(function ($lead) use (&$wonOpportunities, &$openOpportunities) {
             $leadOpportunities = collect($lead['opportunities']);
 
-            $count = $leadOpportunities->count();
-            $annualValue = 0;
+            $wonOpportunitiesCount = 0;
+            $wonAnnualValue = 0;
+            $openOpportunitiesCount = 0;
+            $openAnnualValue = 0;
 
-            if ($count > 0) {
-                $leadOpportunities->each(function ($leadOpp) use (&$annualValue) {
-                    $annualValue += $leadOpp['value']*12/100;
-                });
-            }
+            $leadOpportunities->each(function ($leadOpp) use (&$wonOpportunitiesCount, &$wonAnnualValue, &$openOpportunitiesCount, &$openAnnualValue) {
+                if ($leadOpp['status_type'] == "won") {
+                    $wonOpportunitiesCount += 1;
+                    $wonAnnualValue += $leadOpp['value']*12/100;
+                } else {
+                    $openOpportunitiesCount += 1;
+                    $openAnnualValue += $leadOpp['value']*12/100;
+                }
+            });
 
-            $opportunities['count'] += $count;
-            $opportunities['annual_value'] += $annualValue;
+            $wonOpportunities['count'] += $wonOpportunitiesCount;
+            $wonOpportunities['annual_value'] += $wonAnnualValue;
+            $openOpportunities['count'] += $openOpportunitiesCount;
+            $openOpportunities['annual_value'] += $openAnnualValue;
             
             /*$response = $this->client->get(env('CLOSE_API_URL') . '/activity/email', [
                 'auth' => [
@@ -73,7 +86,8 @@ class ExperimentResultsService
 
         $results = [
             'leadsCount' => $rawLeads->count(),
-            'opportunities' => $opportunities
+            'won_opportunities' => $wonOpportunities,
+            'open_opportunities' => $openOpportunities
         ];
 
         return $results;

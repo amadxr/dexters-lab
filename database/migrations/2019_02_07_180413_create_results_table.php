@@ -24,8 +24,10 @@ class CreateResultsTable extends Migration
                 ->onDelete('cascade');
 
             $table->integer('leads_count')->default(0);
-            $table->integer('opportunities_count')->default(0);
-            $table->decimal('opportunities_annual_value', 10, 2)->default(0.0);
+            $table->integer('won_opportunities_count')->default(0);
+            $table->decimal('won_opportunities_annual_value', 10, 2)->default(0.0);
+            $table->integer('open_opportunities_count')->default(0);
+            $table->decimal('open_opportunities_annual_value', 10, 2)->default(0.0);
             $table->timestamps();
         });
     }

@@ -65,8 +65,10 @@ class ExperimentController extends Controller
 
         $experiment->results()->create([
             'leads_count' => $results['leadsCount'],
-            'opportunities_count' => $results['opportunities']['count'],
-            'opportunities_annual_value' => $results['opportunities']['annual_value']
+            'won_opportunities_count' => $results['won_opportunities']['count'],
+            'won_opportunities_annual_value' => $results['won_opportunities']['annual_value'],
+            'open_opportunities_count' => $results['open_opportunities']['count'],
+            'open_opportunities_annual_value' => $results['open_opportunities']['annual_value']
         ]);
 
         $experiment->save();
@@ -83,8 +85,10 @@ class ExperimentController extends Controller
 
             $experiment->results()->create([
                 'leads_count' => $results['leadsCount'],
-                'opportunities_count' => $results['opportunities']['count'],
-                'opportunities_annual_value' => $results['opportunities']['annual_value']
+                'won_opportunities_count' => $results['won_opportunities']['count'],
+                'won_opportunities_annual_value' => $results['won_opportunities']['annual_value'],
+                'open_opportunities_count' => $results['open_opportunities']['count'],
+                'open_opportunities_annual_value' => $results['open_opportunities']['annual_value']
             ]);
 
             $experiment->save();
