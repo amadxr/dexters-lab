@@ -7,6 +7,9 @@
         <div class="alert alert-success" v-if="assigned">
             <strong>Success!</strong> Your experiment will now be able to track results automatically!
         </div>
+        <div class="alert alert-success" v-if="updated">
+            <strong>Success!</strong> Your experiment's results have been updated!
+        </div>
         <div>
             <form method="post" @submit.prevent="onSubmit">
                 <div class="form-row">
@@ -108,6 +111,7 @@
                 smartViews: [],
                 saved: false,
                 assigned: false,
+                updated: false,
                 selected: {
                     id: null,
                     title: null,
@@ -141,12 +145,21 @@
         methods: {
             initiateFormData () {
                 if (this.detail) {
-                    this.experiment = this.detail;
+                    if (this.detail.results) {
+                        var request = {
+                            id: this.detail.id
+                        };
 
-                    axios.get(process.env.MIX_APP_URL + '/api/smart-views')
-                        .then(({data}) => {
-                            this.smartViews = data;
-                        });
+                        axios.post(process.env.MIX_APP_URL + '/api/experiments/update-results', request)
+                            .then(({data}) => this.setUpdateSuccessMessage(data));
+
+                        axios.get(process.env.MIX_APP_URL + '/api/smart-views')
+                            .then(({data}) => {
+                                this.smartViews = data;
+                            });
+                    } else {
+                        this.experiment = this.detail;
+                    }
                 }
             },
 
@@ -209,6 +222,11 @@
             setAssignSuccessMessage (data) {
                 this.assigned = true;
                 this.experiment.results = data.data.results;
+            },
+
+            setUpdateSuccessMessage (data) {
+                this.updated = true;
+                this.experiment = data.data;
             }
         }
     }

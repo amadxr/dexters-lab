@@ -17,6 +17,7 @@ Route::group(['prefix' => 'experiments'], function () {
     Route::get('/', 'Api\ExperimentController@index');
     Route::post('/', 'Api\ExperimentController@store');
     Route::post('/assign-smart-view', 'Api\ExperimentController@assignSmartView');
+    Route::post('/update-results', 'Api\ExperimentController@updateResults');
 });
 
 Route::group(['prefix' => 'smart-views'], function () {

@@ -48059,6 +48059,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48077,6 +48080,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             smartViews: [],
             saved: false,
             assigned: false,
+            updated: false,
             selected: {
                 id: null,
                 title: null,
@@ -48113,13 +48117,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             if (this.detail) {
-                this.experiment = this.detail;
+                if (this.detail.results) {
+                    var request = {
+                        id: this.detail.id
+                    };
 
-                axios.get("http://dexters-lab.test" + '/api/smart-views').then(function (_ref) {
-                    var data = _ref.data;
+                    axios.post("http://dexters-lab.test" + '/api/experiments/update-results', request).then(function (_ref) {
+                        var data = _ref.data;
+                        return _this.setUpdateSuccessMessage(data);
+                    });
 
-                    _this.smartViews = data;
-                });
+                    axios.get("http://dexters-lab.test" + '/api/smart-views').then(function (_ref2) {
+                        var data = _ref2.data;
+
+                        _this.smartViews = data;
+                    });
+                } else {
+                    this.experiment = this.detail;
+                }
             }
         },
         onSubmit: function onSubmit() {
@@ -48127,11 +48142,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.saved = false;
 
-            axios.post("http://dexters-lab.test" + '/api/experiments', this.experiment).then(function (_ref2) {
-                var data = _ref2.data;
+            axios.post("http://dexters-lab.test" + '/api/experiments', this.experiment).then(function (_ref3) {
+                var data = _ref3.data;
                 return _this2.setSubmitSuccessMessage();
-            }).catch(function (_ref3) {
-                var response = _ref3.response;
+            }).catch(function (_ref4) {
+                var response = _ref4.response;
                 return _this2.setErrors(response);
             });
         },
@@ -48175,11 +48190,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 smart_view_query: this.selected.query
             };
 
-            axios.post("http://dexters-lab.test" + '/api/experiments/assign-smart-view', request).then(function (_ref4) {
-                var data = _ref4.data;
+            axios.post("http://dexters-lab.test" + '/api/experiments/assign-smart-view', request).then(function (_ref5) {
+                var data = _ref5.data;
                 return _this3.setAssignSuccessMessage({ data: data }.data);
-            }).catch(function (_ref5) {
-                var response = _ref5.response;
+            }).catch(function (_ref6) {
+                var response = _ref6.response;
                 return _this3.setErrors(response);
             });
 
@@ -48188,6 +48203,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setAssignSuccessMessage: function setAssignSuccessMessage(data) {
             this.assigned = true;
             this.experiment.results = data.data.results;
+        },
+        setUpdateSuccessMessage: function setUpdateSuccessMessage(data) {
+            this.updated = true;
+            this.experiment = data.data;
         }
     }
 });
@@ -48216,6 +48235,13 @@ var render = function() {
             _vm._v(
               " Your experiment will now be able to track results automatically!\n    "
             )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.updated
+        ? _c("div", { staticClass: "alert alert-success" }, [
+            _c("strong", [_vm._v("Success!")]),
+            _vm._v(" Your experiment's results have been updated!\n    ")
           ])
         : _vm._e(),
       _vm._v(" "),
