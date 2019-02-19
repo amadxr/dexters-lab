@@ -53,7 +53,7 @@
                                     <div v-if="experiment.results" class="card-text">
                                         <p>Number of Leads: {{ experiment.results.leads_count }}</p>
                                         <p>Number of Opportunities: {{ experiment.results.opportunities_count }}</p>
-                                        <p>Value per month: ${{ experiment.results.opportunities_value }}</p>
+                                        <p>Annual Value: ${{ experiment.results.opportunities_annual_value }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                         experiment_id: null,
                         leads_count: null,
                         opportunities_count: null,
-                        opportunities_value: null
+                        opportunities_annual_value: null
                     },
                     validated_learning: null,
                     next_action: null,
@@ -152,14 +152,14 @@
 
                         axios.post(process.env.MIX_APP_URL + '/api/experiments/update-results', request)
                             .then(({data}) => this.setUpdateSuccessMessage(data));
-
-                        axios.get(process.env.MIX_APP_URL + '/api/smart-views')
-                            .then(({data}) => {
-                                this.smartViews = data;
-                            });
                     } else {
                         this.experiment = this.detail;
                     }
+
+                    axios.get(process.env.MIX_APP_URL + '/api/smart-views')
+                        .then(({data}) => {
+                            this.smartViews = data;
+                        });
                 }
             },
 
@@ -193,7 +193,7 @@
                         experiment_id: null,
                         leads_count: null,
                         opportunities_count: null,
-                        opportunities_value: null
+                        opportunities_annual_value: null
                     },
                     validated_learning: null,
                     next_action: null,

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ExperimentResultResource extends JsonResource
+class ResultResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +19,7 @@ class ExperimentResultResource extends JsonResource
             'experiment_id' => $this->experiment_id,
             'leads_count' => $this->leads_count,
             'opportunities_count' => $this->opportunities_count,
-            'opportunities_value' => $this->opportunities_value,
+            'opportunities_annual_value' => $this->opportunities_annual_value,
             'created_at' => $this->created_at->format('d M Y'),
             'updated_at' => $this->updated_at->diffForHumans()
         ];

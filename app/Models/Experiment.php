@@ -22,7 +22,7 @@ class Experiment extends Model
 
     public function results()
     {
-        return $this->hasOne('App\Models\ExperimentResult');
+        return $this->hasOne('App\Models\Result');
     }
 
     public function tags()

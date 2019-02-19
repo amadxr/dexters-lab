@@ -66,7 +66,7 @@ class ExperimentController extends Controller
         $experiment->results()->create([
             'leads_count' => $results['leadsCount'],
             'opportunities_count' => $results['opportunities']['count'],
-            'opportunities_value' => $results['opportunities']['amount']
+            'opportunities_annual_value' => $results['opportunities']['annual_value']
         ]);
 
         $experiment->save();
@@ -84,7 +84,7 @@ class ExperimentController extends Controller
             $experiment->results()->create([
                 'leads_count' => $results['leadsCount'],
                 'opportunities_count' => $results['opportunities']['count'],
-                'opportunities_value' => $results['opportunities']['amount']
+                'opportunities_annual_value' => $results['opportunities']['annual_value']
             ]);
 
             $experiment->save();

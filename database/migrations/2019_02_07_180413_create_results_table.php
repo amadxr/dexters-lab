@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExperimentResultsTable extends Migration
+class CreateResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateExperimentResultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('experiment_results', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('experiment_id');
 
@@ -25,7 +25,7 @@ class CreateExperimentResultsTable extends Migration
 
             $table->integer('leads_count')->default(0);
             $table->integer('opportunities_count')->default(0);
-            $table->float('opportunities_value')->default(0.0);
+            $table->decimal('opportunities_annual_value', 10, 2)->default(0.0);
             $table->timestamps();
         });
     }
@@ -37,7 +37,7 @@ class CreateExperimentResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('experiment_results', function (Blueprint $table) {
+        Schema::dropIfExists('results', function (Blueprint $table) {
             $table->dropForeign(['experiment_id']);
         });
     }

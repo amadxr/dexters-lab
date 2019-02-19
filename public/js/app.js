@@ -48097,7 +48097,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     experiment_id: null,
                     leads_count: null,
                     opportunities_count: null,
-                    opportunities_value: null
+                    opportunities_annual_value: null
                 },
                 validated_learning: null,
                 next_action: null,
@@ -48126,15 +48126,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         var data = _ref.data;
                         return _this.setUpdateSuccessMessage(data);
                     });
-
-                    axios.get("http://dexters-lab.test" + '/api/smart-views').then(function (_ref2) {
-                        var data = _ref2.data;
-
-                        _this.smartViews = data;
-                    });
                 } else {
                     this.experiment = this.detail;
                 }
+
+                axios.get("http://dexters-lab.test" + '/api/smart-views').then(function (_ref2) {
+                    var data = _ref2.data;
+
+                    _this.smartViews = data;
+                });
             }
         },
         onSubmit: function onSubmit() {
@@ -48170,7 +48170,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     experiment_id: null,
                     leads_count: null,
                     opportunities_count: null,
-                    opportunities_value: null
+                    opportunities_annual_value: null
                 },
                 validated_learning: null,
                 next_action: null,
@@ -48454,10 +48454,10 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("p", [
                                     _vm._v(
-                                      "Value per month: $" +
+                                      "Annual Value: $" +
                                         _vm._s(
                                           _vm.experiment.results
-                                            .opportunities_value
+                                            .opportunities_annual_value
                                         )
                                     )
                                   ])

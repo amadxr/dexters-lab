@@ -30,7 +30,7 @@ class ExperimentResultsService
 
         $opportunities = [
             'count' => 0,
-            'amount' => 0
+            'annual_value' => 0
         ];
 
         /*$emailSequencing = [
@@ -41,16 +41,16 @@ class ExperimentResultsService
             $leadOpportunities = collect($lead['opportunities']);
 
             $count = $leadOpportunities->count();
-            $amount = 0;
+            $annualValue = 0;
 
             if ($count > 0) {
-                $leadOpportunities->each(function ($leadOpp) use (&$amount) {
-                    $amount += $leadOpp['value']/100;
+                $leadOpportunities->each(function ($leadOpp) use (&$annualValue) {
+                    $annualValue += $leadOpp['value']*12/100;
                 });
             }
 
             $opportunities['count'] += $count;
-            $opportunities['amount'] += $amount;
+            $opportunities['annual_value'] += $annualValue;
             
             /*$response = $this->client->get(env('CLOSE_API_URL') . '/activity/email', [
                 'auth' => [
