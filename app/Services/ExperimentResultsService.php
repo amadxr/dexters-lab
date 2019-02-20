@@ -85,7 +85,7 @@ class ExperimentResultsService
         });
 
         $results = [
-            'leadsCount' => $rawLeads->count(),
+            'leads_count' => $rawLeads->count(),
             'won_opportunities' => $wonOpportunities,
             'open_opportunities' => $openOpportunities
         ];
