@@ -28,6 +28,16 @@ class ExperimentResultsService
 
         $rawLeads = collect(json_decode($response->getBody(), true)['data']);
 
+        $leadsLifeCycle = [
+            'default' => 0,
+            'book' => 0,
+            'lead_nurturing' => 0,
+            'call_scheduled' => 0,
+            'called_future_follow_up' => 0,
+            'called_closed_converted' => 0,
+            'other' => 0
+        ];
+
         $wonOpportunities = [
             'count' => 0,
             'annual_value' => 0
@@ -42,7 +52,23 @@ class ExperimentResultsService
             'openRate' => 0
         ];*/
 
-        $rawLeads->each(function ($lead) use (&$wonOpportunities, &$openOpportunities) {
+        $rawLeads->each(function ($lead) use (&$wonOpportunities, &$openOpportunities, &$leadsLifeCycle) {
+            if ($lead['status_label'] == "Default") {
+                $leadsLifeCycle['default'] += 1;
+            } else if ($lead['status_label'] == "Book") {
+                $leadsLifeCycle['book'] += 1;
+            } else if ($lead['status_label'] == "Lead Nurturing") {
+                $leadsLifeCycle['lead_nurturing'] += 1;
+            } else if ($lead['status_label'] == "Call Scheduled") {
+                $leadsLifeCycle['call_scheduled'] += 1;
+            } else if ($lead['status_label'] == "Called - Future Follow-up") {
+                $leadsLifeCycle['called_future_follow_up'] += 1;
+            } else if ($lead['status_label'] == "Called - Closed/Converted") {
+                $leadsLifeCycle['called_closed_converted'] += 1;
+            } else {
+                $leadsLifeCycle['other'] += 1;
+            }
+
             $leadOpportunities = collect($lead['opportunities']);
 
             $wonOpportunitiesCount = 0;
@@ -86,6 +112,7 @@ class ExperimentResultsService
 
         $results = [
             'leads_count' => $rawLeads->count(),
+            'leads_life_cycle' => $leadsLifeCycle,
             'won_opportunities' => $wonOpportunities,
             'open_opportunities' => $openOpportunities
         ];
