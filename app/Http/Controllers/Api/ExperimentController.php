@@ -84,7 +84,7 @@ class ExperimentController extends Controller
             $results = $this->experimentResultsService->buildResults($experiment->smart_view_query);
 
             $experiment->results()->create([
-                'leads_count' => $results['leadsCount'],
+                'leads_count' => $results['leads_count'],
                 'won_opportunities_count' => $results['won_opportunities']['count'],
                 'won_opportunities_annual_value' => $results['won_opportunities']['annual_value'],
                 'open_opportunities_count' => $results['open_opportunities']['count'],
