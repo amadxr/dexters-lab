@@ -80,11 +80,7 @@ class ExperimentController extends Controller
             $results = $this->experimentResultsService->buildResults($experiment->smart_view_query);
 
             $experiment->results()->create([
-                'leads_count' => $results['leads_count'],
-                'won_opportunities_count' => $results['won_opportunities']['count'],
-                'won_opportunities_annual_value' => $results['won_opportunities']['annual_value'],
-                'open_opportunities_count' => $results['open_opportunities']['count'],
-                'open_opportunities_annual_value' => $results['open_opportunities']['annual_value']
+                'data' => json_encode($results, JSON_FORCE_OBJECT)
             ]);
 
             $experiment->save();

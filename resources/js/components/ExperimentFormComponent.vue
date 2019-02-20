@@ -128,11 +128,25 @@
                     results: {
                         id: null,
                         experiment_id: null,
-                        leads_count: null,
-                        won_opportunities_count: null,
-                        won_opportunities_annual_value: null,
-                        open_opportunities_count: null,
-                        open_oppportunities_annual_value: null
+                        data: {
+                            leads_count: null,
+                            leads_life_cycle: {
+                                default: null,
+                                lead_nurturing: null,
+                                book: null,
+                                call_scheduled: null,
+                                called_future_follow_up: null,
+                                called_closed_converted: null
+                            },
+                            won_opportunities: {
+                                count: null,
+                                anual_value: null
+                            },
+                            open_opportunities: {
+                                count: null,
+                                annual_value: null
+                            }
+                        }
                     },
                     validated_learning: null,
                     next_action: null,
@@ -195,11 +209,25 @@
                     results: {
                         id: null,
                         experiment_id: null,
-                        leads_count: null,
-                        won_opportunities_count: null,
-                        won_opportunities_annual_value: null,
-                        open_opportunities_count: null,
-                        open_opportunities_annual_value: null
+                        data: {
+                            leads_count: null,
+                            leads_life_cycle: {
+                                default: null,
+                                lead_nurturing: null,
+                                book: null,
+                                call_scheduled: null,
+                                called_future_follow_up: null,
+                                called_closed_converted: null
+                            },
+                            won_opportunities: {
+                                count: null,
+                                anual_value: null
+                            },
+                            open_opportunities: {
+                                count: null,
+                                annual_value: null
+                            }
+                        }
                     },
                     validated_learning: null,
                     next_action: null,
@@ -228,11 +256,13 @@
             setAssignSuccessMessage (data) {
                 this.assigned = true;
                 this.experiment.results = data.data.results;
+                this.experiment.results.data = JSON.parse(data.data.results.data);
             },
 
             setUpdateSuccessMessage (data) {
                 this.updated = true;
                 this.experiment = data.data;
+                this.experiment.results.data = JSON.parse(data.data.results.data);
             }
         }
     }
