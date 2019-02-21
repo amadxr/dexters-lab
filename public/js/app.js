@@ -48064,6 +48064,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48469,54 +48489,146 @@ var render = function() {
                             _vm._v(" "),
                             _vm.experiment.results
                               ? _c("div", { staticClass: "card-text" }, [
-                                  _c("p", [
-                                    _vm._v(
-                                      "Number of Leads: " +
-                                        _vm._s(
-                                          _vm.experiment.results.leads_count
+                                  _vm.experiment.results.data.leads_count
+                                    ? _c("p", [
+                                        _vm._v(
+                                          "\n                                        Number of Leads: " +
+                                            _vm._s(
+                                              _vm.experiment.results.data
+                                                .leads_count
+                                            ) +
+                                            "\n                                    "
                                         )
-                                    )
-                                  ]),
+                                      ])
+                                    : _vm._e(),
                                   _vm._v(" "),
-                                  _c("p", [
-                                    _vm._v(
-                                      "Number of Won Opportunities: " +
-                                        _vm._s(
-                                          _vm.experiment.results
-                                            .won_opportunities_count
-                                        )
-                                    )
-                                  ]),
+                                  _c("h5", [_vm._v("Lead's Life Cycle:")]),
                                   _vm._v(" "),
-                                  _c("p", [
-                                    _vm._v(
-                                      "Won Annual Value: $" +
-                                        _vm._s(
-                                          _vm.experiment.results
-                                            .won_opportunities_annual_value
-                                        )
-                                    )
-                                  ]),
+                                  _vm.experiment.results.data.leads_life_cycle
+                                    ? _c("div", [
+                                        _c("p", [
+                                          _vm._v(
+                                            "Default: " +
+                                              _vm._s(
+                                                _vm.experiment.results.data
+                                                  .leads_life_cycle.default
+                                              )
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            "Book: " +
+                                              _vm._s(
+                                                _vm.experiment.results.data
+                                                  .leads_life_cycle.book
+                                              )
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            "Lead Nurturing: " +
+                                              _vm._s(
+                                                _vm.experiment.results.data
+                                                  .leads_life_cycle
+                                                  .lead_nurturing
+                                              )
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            "Call Scheduled: " +
+                                              _vm._s(
+                                                _vm.experiment.results.data
+                                                  .leads_life_cycle
+                                                  .call_scheduled
+                                              )
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            "Called - Future Follow-up: " +
+                                              _vm._s(
+                                                _vm.experiment.results.data
+                                                  .leads_life_cycle
+                                                  .called_future_follow_up
+                                              )
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            "Called - Closed/Converted: " +
+                                              _vm._s(
+                                                _vm.experiment.results.data
+                                                  .leads_life_cycle
+                                                  .called_closed_converted
+                                              )
+                                          )
+                                        ])
+                                      ])
+                                    : _vm._e(),
                                   _vm._v(" "),
-                                  _c("p", [
-                                    _vm._v(
-                                      "Number of Open Opportunities: " +
-                                        _vm._s(
-                                          _vm.experiment.results
-                                            .open_opportunities_count
-                                        )
-                                    )
-                                  ]),
+                                  _c("h5", [_vm._v("Opportunities metrics:")]),
                                   _vm._v(" "),
-                                  _c("p", [
-                                    _vm._v(
-                                      "Open Annual Value: $" +
-                                        _vm._s(
-                                          _vm.experiment.results
-                                            .open_opportunities_annual_value
+                                  _vm.experiment.results.data.won_opportunities
+                                    .count
+                                    ? _c("p", [
+                                        _vm._v(
+                                          "\n                                        Number of Opportunities Won: " +
+                                            _vm._s(
+                                              _vm.experiment.results.data
+                                                .won_opportunities.count
+                                            ) +
+                                            "\n                                    "
                                         )
-                                    )
-                                  ])
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.experiment.results.data.won_opportunities
+                                    .annual_value
+                                    ? _c("p", [
+                                        _vm._v(
+                                          "\n                                        Won Opportunities Annual Value: " +
+                                            _vm._s(
+                                              _vm.experiment.results.data
+                                                .won_opportunities.annual_value
+                                            ) +
+                                            "\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.experiment.results.data.open_opportunities
+                                    .count
+                                    ? _c("p", [
+                                        _vm._v(
+                                          "\n                                        Number of Open Opportunities: " +
+                                            _vm._s(
+                                              _vm.experiment.results.data
+                                                .open_opportunities.count
+                                            ) +
+                                            "\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.experiment.results.data.open_opportunities
+                                    .annual_value
+                                    ? _c("p", [
+                                        _vm._v(
+                                          "\n                                        Open Opportunities Annual Value: $" +
+                                            _vm._s(
+                                              _vm.experiment.results.data
+                                                .open_opportunities.annual_value
+                                            ) +
+                                            "\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e()
                                 ])
                               : _vm._e()
                           ])

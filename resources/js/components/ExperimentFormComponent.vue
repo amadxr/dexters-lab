@@ -51,11 +51,31 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Results</h5>
                                     <div v-if="experiment.results" class="card-text">
-                                        <p>Number of Leads: {{ experiment.results.leads_count }}</p>
-                                        <p>Number of Won Opportunities: {{ experiment.results.won_opportunities_count }}</p>
-                                        <p>Won Annual Value: ${{ experiment.results.won_opportunities_annual_value }}</p>
-                                        <p>Number of Open Opportunities: {{ experiment.results.open_opportunities_count }}</p>
-                                        <p>Open Annual Value: ${{ experiment.results.open_opportunities_annual_value }}</p>
+                                        <p v-if="experiment.results.data.leads_count">
+                                            Number of Leads: {{ experiment.results.data.leads_count }}
+                                        </p>
+                                        <h5>Lead's Life Cycle:</h5>
+                                        <div v-if="experiment.results.data.leads_life_cycle">
+                                            <p>Default: {{ experiment.results.data.leads_life_cycle.default }}</p>
+                                            <p>Book: {{ experiment.results.data.leads_life_cycle.book }}</p>
+                                            <p>Lead Nurturing: {{ experiment.results.data.leads_life_cycle.lead_nurturing }}</p>
+                                            <p>Call Scheduled: {{ experiment.results.data.leads_life_cycle.call_scheduled }}</p>
+                                            <p>Called - Future Follow-up: {{ experiment.results.data.leads_life_cycle.called_future_follow_up }}</p>
+                                            <p>Called - Closed/Converted: {{ experiment.results.data.leads_life_cycle.called_closed_converted}}</p>
+                                        </div>
+                                        <h5>Opportunities metrics:</h5>
+                                        <p v-if="experiment.results.data.won_opportunities.count">
+                                            Number of Opportunities Won: {{ experiment.results.data.won_opportunities.count }}
+                                        </p>
+                                        <p v-if="experiment.results.data.won_opportunities.annual_value">
+                                            Won Opportunities Annual Value: {{ experiment.results.data.won_opportunities.annual_value }}
+                                        </p>
+                                        <p v-if="experiment.results.data.open_opportunities.count">
+                                            Number of Open Opportunities: {{ experiment.results.data.open_opportunities.count }}
+                                        </p>
+                                        <p v-if="experiment.results.data.open_opportunities.annual_value">
+                                            Open Opportunities Annual Value: ${{ experiment.results.data.open_opportunities.annual_value }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
