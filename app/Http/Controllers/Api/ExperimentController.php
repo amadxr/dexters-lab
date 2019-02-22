@@ -77,13 +77,11 @@ class ExperimentController extends Controller
         $experiment = Experiment::findOrFail($request->id);
 
         if (isset($experiment->smart_view_query)) {
-            $results = $this->experimentResultsService->buildResults($experiment->smart_view_query);
+            $newResults = $this->experimentResultsService->buildResults($experiment->smart_view_query);
+            $results = $experiment->results;
+            $results->data = json_encode($newResults);
 
-            $experiment->results()->create([
-                'data' => json_encode($results, JSON_FORCE_OBJECT)
-            ]);
-
-            $experiment->save();
+            $results->save();
         }
 
         return new ExperimentResource($experiment->load('tags', 'results'));

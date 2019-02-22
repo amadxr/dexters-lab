@@ -48,11 +48,12 @@ class ExperimentResultsService
             'annual_value' => 0
         ];
 
-        /*$emailSequencing = [
-            'openRate' => 0
-        ];*/
+        $emailSequencing = [
+            'sequence_name' => null,
+            'most_recent_templates_sent' => []
+        ];
 
-        $rawLeads->each(function ($lead) use (&$wonOpportunities, &$openOpportunities, &$leadsLifeCycle) {
+        $rawLeads->each(function ($lead) use (&$wonOpportunities, &$openOpportunities, &$leadsLifeCycle, &$emailSequencing) {
             if ($lead['status_label'] == "Default") {
                 $leadsLifeCycle['default'] += 1;
             } else if ($lead['status_label'] == "Book") {
@@ -70,6 +71,38 @@ class ExperimentResultsService
             }
 
             $leadOpportunities = collect($lead['opportunities']);
+
+            if ($leadOpportunities->count() > 0) {
+                $response = $this->client->get(env('CLOSE_API_URL') . '/activity/email', [
+                    'auth' => [
+                        env('CLOSE_USERNAME'),
+                        ''
+                    ],
+                    'query' => [
+                        'lead_id' => $lead['id']
+                    ]
+                ]);
+
+                $rawEmailActivity = collect(json_decode($response->getBody(), true)['data']);
+
+                $sequenceRelatedEmails = $rawEmailActivity->filter(function ($email) {
+                    return isset($email['sequence_name']);
+                });
+
+                $mostRecentStepSent = "";
+
+                $sequenceRelatedEmails->each(function ($email) use (&$emailSequencing, &$mostRecentStepSent) {
+                    if (!isset($emailSequencing['sequence_name'])) {
+                        $emailSequencing['sequence_name'] = $email['sequence_name'];
+                    }
+
+                    if ($email['template_name'] > $mostRecentStepSent) {
+                        $mostRecentStepSent = $email['template_name'];
+                    }
+                });
+
+                array_push($emailSequencing['most_recent_templates_sent'], $mostRecentStepSent);
+            }
 
             $wonOpportunitiesCount = 0;
             $wonAnnualValue = 0;
@@ -90,31 +123,14 @@ class ExperimentResultsService
             $wonOpportunities['annual_value'] += $wonAnnualValue;
             $openOpportunities['count'] += $openOpportunitiesCount;
             $openOpportunities['annual_value'] += $openAnnualValue;
-            
-            /*$response = $this->client->get(env('CLOSE_API_URL') . '/activity/email', [
-                'auth' => [
-                    env('CLOSE_USERNAME'),
-                    ''
-                ],
-                'query' => [
-                    'lead_id' => $lead['id']
-                ]
-            ]);
-
-            $rawEmailActivity = collect(json_decode($response->getBody(), true)['data']);
-
-            $sequenceRelatedEmails = $rawEmailActivity->filter(function ($email) {
-                return isset($email['sequence_id']);
-            });
-
-            $stepsSent = $sequenceRelatedEmails->count();*/
         });
 
         $results = [
             'leads_count' => $rawLeads->count(),
             'leads_life_cycle' => $leadsLifeCycle,
             'won_opportunities' => $wonOpportunities,
-            'open_opportunities' => $openOpportunities
+            'open_opportunities' => $openOpportunities,
+            'email_sequencing' => $emailSequencing
         ];
 
         return $results;
