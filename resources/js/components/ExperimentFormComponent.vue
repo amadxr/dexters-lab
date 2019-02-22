@@ -63,12 +63,12 @@
                                             <p>Called - Future Follow-up: {{ experiment.results.data.leads_life_cycle.called_future_follow_up }}</p>
                                             <p>Called - Closed/Converted: {{ experiment.results.data.leads_life_cycle.called_closed_converted}}</p>
                                         </div>
-                                        <h5>Opportunities metrics:</h5>
+                                        <h5>Opportunity metrics:</h5>
                                         <p v-if="experiment.results.data.won_opportunities.count">
                                             Number of Opportunities Won: {{ experiment.results.data.won_opportunities.count }}
                                         </p>
                                         <p v-if="experiment.results.data.won_opportunities.annual_value">
-                                            Won Opportunities Annual Value: {{ experiment.results.data.won_opportunities.annual_value }}
+                                            Won Opportunities Annual Value: ${{ experiment.results.data.won_opportunities.annual_value }}
                                         </p>
                                         <p v-if="experiment.results.data.open_opportunities.count">
                                             Number of Open Opportunities: {{ experiment.results.data.open_opportunities.count }}
@@ -76,6 +76,14 @@
                                         <p v-if="experiment.results.data.open_opportunities.annual_value">
                                             Open Opportunities Annual Value: ${{ experiment.results.data.open_opportunities.annual_value }}
                                         </p>
+                                        <h5>Email Sequencing metrics:</h5>
+                                        <div v-if="experiment.results.data.email_sequencing.sequence_name">
+                                            <p>Sequence used in this experiment: {{ experiment.results.data.email_sequencing.sequence_name }}</p>
+                                            <p>Steps it took for each successful lead:</p>
+                                            <li v-for="step in experiment.results.data.email_sequencing.most_recent_templates_sent">
+                                                {{ step }}
+                                            </li>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -165,6 +173,10 @@
                             open_opportunities: {
                                 count: null,
                                 annual_value: null
+                            },
+                            email_sequencing: {
+                                sequence_name: null,
+                                most_recent_templates_sent: []
                             }
                         }
                     },
@@ -246,6 +258,10 @@
                             open_opportunities: {
                                 count: null,
                                 annual_value: null
+                            },
+                            email_sequencing: {
+                                sequence_name: null,
+                                most_recent_templates_sent: []
                             }
                         }
                     },

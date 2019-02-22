@@ -48084,6 +48084,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48134,6 +48142,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         open_opportunities: {
                             count: null,
                             annual_value: null
+                        },
+                        email_sequencing: {
+                            sequence_name: null,
+                            most_recent_templates_sent: []
                         }
                     }
                 },
@@ -48223,6 +48235,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         open_opportunities: {
                             count: null,
                             annual_value: null
+                        },
+                        email_sequencing: {
+                            sequence_name: null,
+                            most_recent_templates_sent: []
                         }
                     }
                 },
@@ -48572,7 +48588,7 @@ var render = function() {
                                       ])
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _c("h5", [_vm._v("Opportunities metrics:")]),
+                                  _c("h5", [_vm._v("Opportunity metrics:")]),
                                   _vm._v(" "),
                                   _vm.experiment.results.data.won_opportunities
                                     .count
@@ -48592,7 +48608,7 @@ var render = function() {
                                     .annual_value
                                     ? _c("p", [
                                         _vm._v(
-                                          "\n                                        Won Opportunities Annual Value: " +
+                                          "\n                                        Won Opportunities Annual Value: $" +
                                             _vm._s(
                                               _vm.experiment.results.data
                                                 .won_opportunities.annual_value
@@ -48628,6 +48644,51 @@ var render = function() {
                                             "\n                                    "
                                         )
                                       ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c("h5", [
+                                    _vm._v("Email Sequencing metrics:")
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm.experiment.results.data.email_sequencing
+                                    .sequence_name
+                                    ? _c(
+                                        "div",
+                                        [
+                                          _c("p", [
+                                            _vm._v(
+                                              "Sequence used in this experiment: " +
+                                                _vm._s(
+                                                  _vm.experiment.results.data
+                                                    .email_sequencing
+                                                    .sequence_name
+                                                )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("p", [
+                                            _vm._v(
+                                              "Steps it took for each successful lead:"
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _vm._l(
+                                            _vm.experiment.results.data
+                                              .email_sequencing
+                                              .most_recent_templates_sent,
+                                            function(step) {
+                                              return _c("li", [
+                                                _vm._v(
+                                                  "\n                                            " +
+                                                    _vm._s(step) +
+                                                    "\n                                        "
+                                                )
+                                              ])
+                                            }
+                                          )
+                                        ],
+                                        2
+                                      )
                                     : _vm._e()
                                 ])
                               : _vm._e()
