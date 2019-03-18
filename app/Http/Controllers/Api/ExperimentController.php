@@ -34,13 +34,23 @@ class ExperimentController extends Controller
 
         collect($request->tags)->each(function ($tag) use (&$tagIds) {
             if ($tag['id'] != null) {
-                array_push($tagIds, $tag['id']);
+                if (!in_array($tag['id'], $tagIds)) {
+                    array_push($tagIds, $tag['id']);
+                }
             } else {
-                $newTag = Tag::create([
-                    'name' => $tag['name']
-                ]);
+                $existingTag = Tag::where('name', $tag['name'])->first();
 
-                array_push($tagIds, $newTag->id);
+                if ($existingTag == null) {
+                    $newTag = Tag::create([
+                        'name' => $tag['name']
+                    ]);
+
+                    array_push($tagIds, $newTag->id);
+                } else {
+                    if (!in_array($existingTag['id'], $tagIds)) {
+                        array_push($tagIds, $existingTag['id']);
+                    }
+                }
             }
         });
 
