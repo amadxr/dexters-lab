@@ -26,7 +26,8 @@
         </h5>
         <div class="row">
             <tag-search
-                v-model="value.tags">
+                v-model="tags"
+                @change="updateFilters">
             </tag-search>
         </div>
     </div>
@@ -75,6 +76,26 @@
             value: {
                 type: Object,
                 required: true
+            }
+        },
+
+        mounted () {
+            this.initiateDashboardData()
+        },
+
+        data () {
+            return {
+                tags: []
+            }
+        },
+
+        methods: {
+            initiateDashboardData () {
+                this.tags = this.value.tags;
+            },
+
+            updateFilters () {
+                window.location.href = "dashboard/" + this.value.tags[0]['name'];
             }
         }
     }

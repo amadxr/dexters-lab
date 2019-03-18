@@ -50202,12 +50202,13 @@ var render = function() {
       { staticClass: "row" },
       [
         _c("tag-search", {
+          on: { change: _vm.updateFilters },
           model: {
-            value: _vm.value.tags,
+            value: _vm.tags,
             callback: function($$v) {
-              _vm.$set(_vm.value, "tags", $$v)
+              _vm.tags = $$v
             },
-            expression: "value.tags"
+            expression: "tags"
           }
         })
       ],
@@ -50353,12 +50354,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         value: {
             type: Object,
             required: true
+        }
+    },
+
+    mounted: function mounted() {
+        this.initiateDashboardData();
+    },
+    data: function data() {
+        return {
+            tags: []
+        };
+    },
+
+
+    methods: {
+        initiateDashboardData: function initiateDashboardData() {
+            this.tags = this.value.tags;
+        },
+        updateFilters: function updateFilters() {
+            window.location.href = "dashboard/" + this.value.tags[0]['name'];
         }
     }
 });
