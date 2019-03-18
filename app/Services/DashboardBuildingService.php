@@ -48,9 +48,14 @@ class DashboardBuildingService
             }
         });
 
+        $opportunities['count'] = (string)$opportunities['count'];
+        $opportunities['annual_value'] = '$ ' . $opportunities['annual_value'];
+
         $info = [
             'leads_life_cycle' => $leadsLifeCycle,
             'opportunities' => $opportunities
         ];
+
+        return $info;
     }
 }

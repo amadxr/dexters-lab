@@ -26,6 +26,12 @@ Vue.component('experiment-component', require('./components/ExperimentComponent.
 Vue.component('modal-component', require('./components/ModalComponent.vue'));
 Vue.component('tag-search-component', require('./components/TagSearchComponent.vue'));
 Vue.component('form-field-component', require('./components/FormFieldComponent.vue'));
+Vue.component('experiments-dashboard', require('./components/ExperimentsDashboardComponent.vue'));
+Vue.component('leads-life-cycle', require('./components/LeadsLifeCycleComponent.vue'));
+Vue.component('lead-status-card', require('./components/LeadStatusCardComponent.vue'));
+Vue.component('opportunities-section', require('./components/OpportunitiesSectionComponent.vue'));
+Vue.component('call-schedule', require('./components/CallScheduleComponent.vue'));
+Vue.component('opportunity-info-card', require('./components/OpportunityInfoCardComponent.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
