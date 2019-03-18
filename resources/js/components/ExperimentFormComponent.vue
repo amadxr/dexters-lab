@@ -38,9 +38,9 @@
                             <span v-if="errors.falsifiable_hypothesis" class="help-block text-danger">{{ errors.falsifiable_hypothesis[0] }}</span>
                         </div>
                         <div class="form-group">
-                            <tag-search-component 
+                            <tag-search
                                 v-model="experiment.tags">
-                            </tag-search-component>
+                            </tag-search>
                             <span v-if="errors.tags" class="help-block text-danger">{{ errors.tags[0] }}</span>
                         </div>
                     </div>

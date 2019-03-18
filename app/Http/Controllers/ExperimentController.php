@@ -30,9 +30,9 @@ class ExperimentController extends Controller
         return view('experiments.show', ['experiment' => $experiment->load('tags', 'results')]);
     }
 
-    public function showDashboard()
+    public function showDashboard(Request $request)
     {
-        $dashboardInfo = $this->dashboardBuildingService->buildDashboardInfo();
+        $dashboardInfo = $this->dashboardBuildingService->buildDashboardInfo($request->input('tag'));
 
         return view('experiments.dashboard', ['info' => $dashboardInfo]);
     }

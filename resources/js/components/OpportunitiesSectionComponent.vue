@@ -35,6 +35,7 @@
 
     .opportunities-section-body {
         margin-top: 40px;
+        margin-bottom: 32px;
         display: flex;
         justify-content: space-between;
     }

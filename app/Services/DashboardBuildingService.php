@@ -53,7 +53,8 @@ class DashboardBuildingService
 
         $info = [
             'leads_life_cycle' => $leadsLifeCycle,
-            'opportunities' => $opportunities
+            'opportunities' => $opportunities,
+            'tags' => isset($tag) ? [$tag] : []
         ];
 
         return $info;

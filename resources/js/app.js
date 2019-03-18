@@ -24,7 +24,7 @@ Vue.component('experiments-list-component', require('./components/ExperimentsLis
 Vue.component('experiment-form-component', require('./components/ExperimentFormComponent.vue'));
 Vue.component('experiment-component', require('./components/ExperimentComponent.vue'));
 Vue.component('modal-component', require('./components/ModalComponent.vue'));
-Vue.component('tag-search-component', require('./components/TagSearchComponent.vue'));
+Vue.component('tag-search', require('./components/TagSearchComponent.vue'));
 Vue.component('form-field-component', require('./components/FormFieldComponent.vue'));
 Vue.component('experiments-dashboard', require('./components/ExperimentsDashboardComponent.vue'));
 Vue.component('leads-life-cycle', require('./components/LeadsLifeCycleComponent.vue'));

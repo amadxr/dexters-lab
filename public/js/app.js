@@ -14061,7 +14061,7 @@ Vue.component('experiments-list-component', __webpack_require__(40));
 Vue.component('experiment-form-component', __webpack_require__(43));
 Vue.component('experiment-component', __webpack_require__(46));
 Vue.component('modal-component', __webpack_require__(49));
-Vue.component('tag-search-component', __webpack_require__(64));
+Vue.component('tag-search', __webpack_require__(64));
 Vue.component('form-field-component', __webpack_require__(69));
 Vue.component('experiments-dashboard', __webpack_require__(72));
 Vue.component('leads-life-cycle', __webpack_require__(77));
@@ -48460,7 +48460,7 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _c("tag-search-component", {
+                    _c("tag-search", {
                       model: {
                         value: _vm.experiment.tags,
                         callback: function($$v) {
@@ -50191,7 +50191,28 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6" }, [_c("call-schedule")], 1)
-    ])
+    ]),
+    _vm._v(" "),
+    _c("h5", { staticClass: "tag-search-label" }, [
+      _vm._v("\n        Search by tag\n    ")
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      [
+        _c("tag-search", {
+          model: {
+            value: _vm.value.tags,
+            callback: function($$v) {
+              _vm.$set(_vm.value, "tags", $$v)
+            },
+            expression: "value.tags"
+          }
+        })
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -50250,7 +50271,7 @@ exports = module.exports = __webpack_require__(52)(false);
 
 
 // module
-exports.push([module.i, "\n.dashboard-title-row {\n    margin-top: 48px;\n    margin-bottom: 24px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n}\n.dashboard-title {\n    width: 442px;\n    height: 43px;\n    font-size: 35px;\n    font-weight: 500;\n    font-style: normal;\n    font-stretch: normal;\n    line-height: normal;\n    letter-spacing: normal;\n    color: #384963;\n}\n.information-dashboard-row {\n    margin-top: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.dashboard-title-row {\n    margin-top: 48px;\n    margin-bottom: 24px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n}\n.dashboard-title {\n    width: 442px;\n    height: 43px;\n    font-size: 35px;\n    font-weight: 500;\n    font-style: normal;\n    font-stretch: normal;\n    line-height: normal;\n    letter-spacing: normal;\n    color: #384963;\n}\n.information-dashboard-row {\n    margin-top: 40px;\n}\n.tag-search-label {\n    width: 106px;\n    height: 23px;\n    font-size: 17px;\n    font-weight: bold;\n    font-style: normal;\n    font-stretch: normal;\n    line-height: 1.32;\n    letter-spacing: normal;\n    color: #6c81a4;\n}\n", ""]);
 
 // exports
 
@@ -50261,6 +50282,26 @@ exports.push([module.i, "\n.dashboard-title-row {\n    margin-top: 48px;\n    ma
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -51004,7 +51045,7 @@ exports = module.exports = __webpack_require__(52)(false);
 
 
 // module
-exports.push([module.i, "\n.opportunities-section-title {\n    width: 156px;\n    height: 20px;\n    font-size: 16px;\n    font-weight: normal;\n    font-style: normal;\n    font-stretch: normal;\n    line-height: normal;\n    letter-spacing: 3px;\n    display: inline-block;\n    color: #aeb9cd;\n    text-transform: uppercase;\n}\n.opportunities-section-body {\n    margin-top: 40px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n", ""]);
+exports.push([module.i, "\n.opportunities-section-title {\n    width: 156px;\n    height: 20px;\n    font-size: 16px;\n    font-weight: normal;\n    font-style: normal;\n    font-stretch: normal;\n    line-height: normal;\n    letter-spacing: 3px;\n    display: inline-block;\n    color: #aeb9cd;\n    text-transform: uppercase;\n}\n.opportunities-section-body {\n    margin-top: 40px;\n    margin-bottom: 32px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n", ""]);
 
 // exports
 
@@ -51015,6 +51056,7 @@ exports.push([module.i, "\n.opportunities-section-title {\n    width: 156px;\n  
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //

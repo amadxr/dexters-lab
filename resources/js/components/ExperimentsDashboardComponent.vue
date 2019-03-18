@@ -21,6 +21,14 @@
                 </call-schedule>
             </div>
         </div>
+        <h5 class="tag-search-label">
+            Search by tag
+        </h5>
+        <div class="row">
+            <tag-search
+                v-model="value.tags">
+            </tag-search>
+        </div>
     </div>
 </template>
 
@@ -46,6 +54,18 @@
 
     .information-dashboard-row {
         margin-top: 40px;
+    }
+
+    .tag-search-label {
+        width: 106px;
+        height: 23px;
+        font-size: 17px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.32;
+        letter-spacing: normal;
+        color: #6c81a4;
     }
 </style>
 
