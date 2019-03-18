@@ -47,7 +47,7 @@
 
         methods: {
             searchTag () {
-                if (this.key.length >= 3) {
+                if (this.key.length >= 2) {
                     axios.get(process.env.MIX_APP_URL + '/api/tags', {
                         params: {
                             key: this.key
@@ -61,7 +61,7 @@
             },
 
             createTag () {
-                if (this.key.length >= 3) {
+                if (this.key.length >= 2) {
                     var newTags = this.value.concat([{
                         'id': null,
                         'name': this.key

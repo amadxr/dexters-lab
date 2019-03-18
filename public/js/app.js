@@ -49802,7 +49802,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         searchTag: function searchTag() {
             var _this = this;
 
-            if (this.key.length >= 3) {
+            if (this.key.length >= 2) {
                 axios.get("http://dexters-lab.test" + '/api/tags', {
                     params: {
                         key: this.key
@@ -49817,7 +49817,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         createTag: function createTag() {
-            if (this.key.length >= 3) {
+            if (this.key.length >= 2) {
                 var newTags = this.value.concat([{
                     'id': null,
                     'name': this.key
