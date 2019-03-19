@@ -27,7 +27,7 @@
         <div class="row">
             <tag-search
                 v-model="tags"
-                @change="updateFilters">
+                v-on:input="updateFilters">
             </tag-search>
         </div>
     </div>
@@ -95,7 +95,11 @@
             },
 
             updateFilters () {
-                window.location.href = "dashboard/" + this.value.tags[0]['name'];
+                if (this.tags.length == 0) {
+                    window.location.href = "/dashboard";
+                } else {
+                    window.location.href = "/dashboard/?tag=" + this.tags[0]['name'];
+                }
             }
         }
     }

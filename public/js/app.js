@@ -50202,7 +50202,7 @@ var render = function() {
       { staticClass: "row" },
       [
         _c("tag-search", {
-          on: { change: _vm.updateFilters },
+          on: { input: _vm.updateFilters },
           model: {
             value: _vm.tags,
             callback: function($$v) {
@@ -50379,7 +50379,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.tags = this.value.tags;
         },
         updateFilters: function updateFilters() {
-            window.location.href = "dashboard/" + this.value.tags[0]['name'];
+            if (this.tags.length == 0) {
+                window.location.href = "/dashboard";
+            } else {
+                window.location.href = "/dashboard/?tag=" + this.tags[0]['name'];
+            }
         }
     }
 });
