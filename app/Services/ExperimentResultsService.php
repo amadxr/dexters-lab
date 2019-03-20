@@ -53,12 +53,19 @@ class ExperimentResultsService
             'most_recent_templates_sent' => []
         ];
 
-        $rawLeads->each(function ($lead) use (&$wonOpportunities, &$openOpportunities, &$leadsLifeCycle, &$emailSequencing) {
+        $leadNurturingEquivalents = [
+            "Lead Nurturing",
+            "Lead Well",
+            "Lead Well - S",
+            "Lead Well - P"
+        ];
+
+        $rawLeads->each(function ($lead) use (&$wonOpportunities, &$openOpportunities, &$leadsLifeCycle, &$emailSequencing, $leadNurturingEquivalents) {
             if ($lead['status_label'] == "Default") {
                 $leadsLifeCycle['default'] += 1;
             } else if ($lead['status_label'] == "Book") {
                 $leadsLifeCycle['book'] += 1;
-            } else if ($lead['status_label'] == "Lead Nurturing") {
+            } else if (in_array($lead['status_label'], $leadNurturingEquivalents)) {
                 $leadsLifeCycle['lead_nurturing'] += 1;
             } else if ($lead['status_label'] == "Call Scheduled") {
                 $leadsLifeCycle['call_scheduled'] += 1;
