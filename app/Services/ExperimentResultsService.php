@@ -26,7 +26,27 @@ class ExperimentResultsService
             ]
         ]);
 
-        $rawLeads = collect(json_decode($response->getBody(), true)['data']);
+        $leadsArray = json_decode($response->getBody(), true)['data'];
+
+        while (json_decode($response->getBody(), true)['has_more']) {
+            $skip = sizeof($leadsArray);
+
+            $response = $this->client->get(env('CLOSE_API_URL') . '/lead', [
+                'auth' => [
+                    env('CLOSE_USERNAME'),
+                    ''
+                ],
+                'query' => [
+                    'query' => $smartViewQuery,
+                    '_limit' => 200,
+                    '_skip' => $skip
+                ]
+            ]);
+
+            $leadsArray = array_merge($leadsArray, json_decode($response->getBody(), true)['data']);
+        }
+        
+        $rawLeads = collect($leadsArray);
 
         $leadsLifeCycle = [
             'default' => 0,
