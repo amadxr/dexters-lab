@@ -71,11 +71,18 @@ class ExperimentController extends Controller
         $experiment->smart_view_id = $request->smart_view_id;
         $experiment->smart_view_query = $request->smart_view_query;
 
-        $results = $this->experimentResultsService->buildResults($experiment->smart_view_query);
+        $newResults = $this->experimentResultsService->buildResults($experiment->smart_view_query);
 
-        $experiment->results()->create([
-            'data' => json_encode($results)
-        ]);
+        if (isset($experiment->results)) {
+            $results = $experiment->results;
+            $results->data = json_encode($newResults);
+
+            $results->save();
+        } else {
+            $experiment->results()->create([
+                'data' => json_encode($newResults)
+            ]);
+        }
 
         $experiment->save();
 
