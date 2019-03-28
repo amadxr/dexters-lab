@@ -73,6 +73,11 @@ class ExperimentResultsService
             'most_recent_templates_sent' => []
         ];
 
+        $defaultEquivalents = [
+            "Default",
+            "LinkedIn"
+        ];
+
         $leadNurturingEquivalents = [
             "Lead Nurturing",
             "Lead Well",
@@ -81,7 +86,7 @@ class ExperimentResultsService
         ];
 
         $rawLeads->each(function ($lead) use (&$wonOpportunities, &$openOpportunities, &$leadsLifeCycle, &$emailSequencing, $leadNurturingEquivalents) {
-            if ($lead['status_label'] == "Default") {
+            if (in_array($lead['status_label'], $defaultEquivalents)) {
                 $leadsLifeCycle['default'] += 1;
             } else if ($lead['status_label'] == "Book") {
                 $leadsLifeCycle['book'] += 1;
