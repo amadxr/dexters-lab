@@ -204,6 +204,7 @@
                             .then(({data}) => this.setUpdateSuccessMessage(data));
                     } else {
                         this.experiment = this.detail;
+                        this.saved = true;
                     }
 
                     axios.get(process.env.MIX_APP_URL + '/api/smart-views')
@@ -217,7 +218,7 @@
                 this.saved = false;
 
                 axios.post(process.env.MIX_APP_URL + '/api/experiments', this.experiment)
-                    .then(({data}) => this.setSubmitSuccessMessage())
+                    .then(({data}) => this.setSubmitSuccessMessage({data}.data))
                     .catch(({response}) => this.setErrors(response));
             },
 
@@ -225,9 +226,9 @@
                 this.errors = response.data.errors;
             },
 
-            setSubmitSuccessMessage () {
+            setSubmitSuccessMessage (data) {
                 this.reset();
-                this.saved = true;
+                window.location.href = "/show/" + data.data.id;
             },
 
             reset () {
