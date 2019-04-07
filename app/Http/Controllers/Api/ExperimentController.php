@@ -6,6 +6,7 @@ use App\Models\Experiment;
 use App\Models\Tag;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssignSmartView;
+use App\Http\Requests\DeleteExperiment;
 use App\Http\Requests\StoreExperiment;
 use App\Http\Requests\UpdateResults;
 use App\Http\Resources\ExperimentResource;
@@ -102,5 +103,15 @@ class ExperimentController extends Controller
         }
 
         return new ExperimentResource($experiment->load('tags', 'results'));
+    }
+
+    public function delete(DeleteExperiment $request)
+    {
+        $experiment = Experiment::findOrFail($request->id);
+        $experiment->delete();
+
+        return response()->json([
+            'message' => 'Experiment deleted.'
+        ], 200);
     }
 }
