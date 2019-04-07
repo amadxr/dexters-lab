@@ -6,6 +6,7 @@
             </div>
             <div class="float-right">
                 <button type="button" class="btn btn-primary" v-on:click="showDetails">Details</button>
+                <button type="button" class="btn btn-danger" v-on:click="deleteExperiment">Delete</button>
             </div>
         </div>
         <div class="card-body">
@@ -27,8 +28,17 @@
         },
 
         methods: {
-            showDetails() {
+            showDetails () {
                 window.location.href = "show/" + this.experiment.id;
+            },
+
+            deleteExperiment () {
+                var request = {
+                    id: this.experiment.id
+                };
+
+                axios.post(process.env.MIX_APP_URL + '/api/experiments/delete', request)
+                    .then(({data}) => window.location.reload(true));
             }
         }
     }

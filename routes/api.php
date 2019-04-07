@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::group(['prefix' => 'experiments'], function () {
     Route::get('/', 'Api\ExperimentController@index');
     Route::post('/', 'Api\ExperimentController@store');
+    Route::post('/delete', 'Api\ExperimentController@delete');
     Route::post('/assign-smart-view', 'Api\ExperimentController@assignSmartView');
     Route::post('/update-results', 'Api\ExperimentController@updateResults');
 });
