@@ -25,6 +25,11 @@ class ExperimentController extends Controller
         return view('experiments.create');
     }
 
+    public function createChild(Experiment $experiment)
+    {
+        return view('experiments.create', ['parent' => $experiment->id]);
+    }
+
     public function show(Experiment $experiment)
     {
         return view('experiments.show', ['experiment' => $experiment->load('tags', 'results')]);

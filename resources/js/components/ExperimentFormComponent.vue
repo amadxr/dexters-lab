@@ -97,6 +97,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 text-right" v-if="detail">
+                    <button type="button" id="show-modal" @click="createChild" class="btn btn-primary btn-lg">Create Child</button>
                     <button type="button" id="show-modal" @click="showModal = true" class="btn btn-secondary btn-lg">Advanced Config</button>
                 </div>
                 <div class="col-md-12 text-right" v-else>
@@ -274,6 +275,10 @@
                     created_at: null,
                     updated_at: null
                 };
+            },
+
+            createChild () {
+                window.location.href = "/create-child/" + this.experiment.id;
             },
 
             onAssign () {
