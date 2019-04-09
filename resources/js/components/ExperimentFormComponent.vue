@@ -129,6 +129,11 @@
             detail: {
                 type: Object,
                 required: false
+            },
+
+            parent: {
+                type: Number,
+                required: false
             }
         },
 
@@ -212,6 +217,8 @@
                         .then(({data}) => {
                             this.smartViews = data;
                         });
+                } else if (this.parent) {
+                    this.experiment.parent_id = this.parent;
                 }
             },
 
