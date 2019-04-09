@@ -97,8 +97,9 @@
                     </div>
                 </div>
                 <div class="col-md-12 text-right" v-if="detail">
-                    <button type="button" id="show-modal" @click="createChild" class="btn btn-primary btn-lg">Create Child</button>
+                    <button type="button" id="create-child" @click="createChild" class="btn btn-primary btn-lg">Create Child</button>
                     <button type="button" id="show-modal" @click="showModal = true" class="btn btn-secondary btn-lg">Advanced Config</button>
+                    <button type="button" id="update-experiment" @click="updateExperiment" class="btn btn-success btn-lg">Update Experiment</button>
                 </div>
                 <div class="col-md-12 text-right" v-else>
                     <button type="submit" disabled style="display: none" class="btn btn-primary btn-lg">Submit</button>
@@ -286,6 +287,14 @@
 
             createChild () {
                 window.location.href = "/create-child/" + this.experiment.id;
+            },
+
+            updateExperiment () {
+                this.saved = false;
+
+                axios.post(process.env.MIX_APP_URL + '/api/experiments', this.experiment)
+                    .then(({data}) => this.setSubmitSuccessMessage({data}.data))
+                    .catch(({response}) => this.setErrors(response));
             },
 
             onAssign () {

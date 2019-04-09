@@ -55,12 +55,20 @@ class ExperimentController extends Controller
             }
         });
 
-        $experiment = Experiment::create($request->only([
-            'title',
-            'background',
-            'falsifiable_hypothesis',
-            'parent_id'
-        ]));
+        if ($request->input('id')) {
+            $experiment = Experiment::findOrFail($request->id);
+            $experiment->title = $request->title;
+            $experiment->background = $request->background;
+            $experiment->falsifiable_hypothesis = $request->falsifiable_hypothesis;
+            $experiment->save();
+        } else {
+            $experiment = Experiment::create($request->only([
+                'title',
+                'background',
+                'falsifiable_hypothesis',
+                'parent_id'
+            ]));
+        }
 
         $experiment->tags()->sync($tagIds);
 
