@@ -58,10 +58,12 @@ class ExperimentController extends Controller
         $experiment = Experiment::create($request->only([
             'title',
             'background',
-            'falsifiable_hypothesis'
+            'falsifiable_hypothesis',
+            'parent_id'
         ]));
 
         $experiment->tags()->sync($tagIds);
+
 
         return new ExperimentResource($experiment->load('tags', 'results'));
     }

@@ -27,7 +27,7 @@ class ExperimentController extends Controller
 
     public function createChild(Experiment $experiment)
     {
-        return view('experiments.create', ['parent' => $experiment->id]);
+        return view('experiments.create-child', ['parent' => $experiment->id]);
     }
 
     public function show(Experiment $experiment)
